@@ -59,7 +59,7 @@ st.markdown("""
     font-size: 0.8rem !important;
     font-weight: 600 !important;
     padding: 0.35rem 1rem !important;
-    width: 60% !important;
+    width: 90% !important;
 }
 
 [data-testid="stButton"] > button:hover {
