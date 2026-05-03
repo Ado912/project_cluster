@@ -356,7 +356,7 @@ Grafik ini menunjukkan kenapa kita memilih K=3 sebagai jumlah cluster optimal.</
         markers=True,
         labels={"x": "Jumlah Cluster (K)", "y": "Inertia"},
         title="Elbow Method — Cluster ada 3",
-    t    emplate="plotly_dark"
+        template="plotly_dark"
 )
     fig_elbow.add_vline(
         x=2,
