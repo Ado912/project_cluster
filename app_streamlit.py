@@ -1,9 +1,13 @@
+import os
 import numpy as np
 import pandas as pd
 import streamlit as st
 import joblib
 import plotly.express as px
 import plotly.graph_objects as go
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
 
 # ─── Config ───────────────────────────────────────────────
 # Bagian load model
