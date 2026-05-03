@@ -347,24 +347,23 @@ Grafik ini menunjukkan kenapa kita memilih K=3 sebagai jumlah cluster optimal.</
     K_range = range(1, 11)
     for k in K_range:
         km = KMeans(n_clusters=k, random_state=42, n_init=10)
-        
-    km.fit(X_scaled)
-    inertia.append(km.inertia_)
+        km.fit(X_scaled)
+        inertia.append(km.inertia_)
 
     fig_elbow = px.line(
-    x=list(K_range),
-    y=inertia,
-    markers=True,
-    labels={"x": "Jumlah Cluster (K)", "y": "Inertia"},
-    title="Elbow Method — Cluster ada 3",
-    template="plotly_dark"
+        x=list(K_range),
+        y=inertia,
+        markers=True,
+        labels={"x": "Jumlah Cluster (K)", "y": "Inertia"},
+        title="Elbow Method — Cluster ada 3",
+    t    emplate="plotly_dark"
 )
     fig_elbow.add_vline(
-    x=2,
-    line_dash="dash",
-    line_color="#FF007F",
-    annotation_text="K=2 Optimal",
-    annotation_font_color="#FF007F"
+        x=2,
+        line_dash="dash",
+        line_color="#FF007F",
+        annotation_text="K=2 Optimal",
+        annotation_font_color="#FF007F"
 )
     fig_elbow.update_traces(
     line_color="#4F8EF7",
