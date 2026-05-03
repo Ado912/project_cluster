@@ -6,6 +6,19 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 # ─── Config ───────────────────────────────────────────────
+# Bagian load model
+if not os.path.exists("cluster3.joblib"):
+    df_train = pd.read_csv("Wholesale customers data.csv")
+    FITUR_TRAIN = ["Fresh", "Milk", "Grocery", "Frozen", 
+                   "Detergents_Paper", "Delicassen"]
+    X = df_train[FITUR_TRAIN].values
+    model_baru = Pipeline([
+        ('scaler', StandardScaler()),
+        ('kmeans', KMeans(n_clusters=2, random_state=42, n_init=10))
+    ])
+    model_baru.fit(X)
+    joblib.dump(model_baru, "cluster3.joblib")
+
 model = joblib.load("cluster3.joblib")
 df = pd.read_csv("Wholesale customers data.csv")
 FITUR = ["Fresh", "Milk", "Grocery", "Frozen", "Detergents_Paper", "Delicassen"]
