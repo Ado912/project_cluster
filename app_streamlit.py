@@ -150,7 +150,7 @@ with col4:
         st.session_state.halaman = "Prediksi"
 with col5:
     if st.button("code"):
-        st.session_state.halaman= "code
+        st.session_state.halaman= "code"
 
 # 3. Tampilkan konten sesuai halaman
 if st.session_state.halaman == "Project":
