@@ -165,7 +165,7 @@ distributor grosir berdasarkan pola pembelian mereka</p>
             """,unsafe_allow_html=True)
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Total Pelanggan", "400")
-    c2.metric("Jumlah Cluster", "3")
+    c2.metric("Jumlah Cluster", "2")
     c3.metric("Fitur Data", "6")
     c4.metric("Silhouette Score", "0.5483")
     st.markdown("""
