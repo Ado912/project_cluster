@@ -138,7 +138,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 # 2. Tombol navbar pakai st.button
-col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
+col1, col2, col3, col4 ,col5 = st.columns([3, 1, 1, 1,1])
 with col2:
     if st.button("Project"):
         st.session_state.halaman = "Project"
@@ -148,6 +148,9 @@ with col3:
 with col4:
     if st.button("Prediksi"):
         st.session_state.halaman = "Prediksi"
+with col5:
+    if st.button("code"):
+        st.session_state.halaman= "code
 
 # 3. Tampilkan konten sesuai halaman
 if st.session_state.halaman == "Project":
