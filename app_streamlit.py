@@ -542,3 +542,204 @@ elif st.session_state.halaman == "Prediksi":
                 Hasil prediksi akan muncul di sini</p>
             </div>
             """, unsafe_allow_html=True)
+
+elif st.session_state.halaman == "code":
+    elif st.session_state.halaman == "Kode Model":
+    st.markdown("""
+        <h1 style="font-family:'Syne',sans-serif; font-weight:800;font-size: 2.2rem; color:#FFCCF2">
+        Kode Pembuatan Model (Full)
+        </h1>  
+        <p style="color:#FFCCF2; font-size:0.88rem; margin-bottom:2rem;">
+        Berikut adalah keseluruhan kode Python dari Jupyter Notebook yang mencakup Exploratory Data Analysis (EDA), deteksi outlier, evaluasi algoritma, hingga penyimpanan model akhir.
+        </p>
+    """, unsafe_allow_html=True)
+
+    # String yang berisi KESELURUHAN kode dari Jupyter Notebook
+    kode_pelatihan = '''import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import silhouette_score
+import joblib
+
+# ==========================================
+# 1. LOAD DATA & EKSPLORASI AWAL
+# ==========================================
+df = pd.read_csv("Wholesale customers data.csv")
+
+print(df.head())
+print(df.tail())
+print(df.columns)
+print(df['Channel'].unique())
+print(df['Region'].unique())
+print(df.sample(5))
+
+# ==========================================
+# 2. VISUALISASI DISTRIBUSI DATA
+# ==========================================
+sns.histplot(df["Channel"], kde=True)
+plt.title("Channel")
+plt.show()
+
+sns.histplot(df['Fresh'], kde=True)
+plt.title("Fresh")
+plt.show()
+
+sns.histplot(df['Milk'], kde=True)
+plt.title("Milk")
+plt.show()
+
+sns.histplot(df['Grocery'], kde=True)
+plt.title("Grocery")
+plt.show()
+
+sns.histplot(df['Frozen'], kde=True)
+plt.title("Frozen")
+plt.show()
+
+# ==========================================
+# 3. KORELASI ANTAR FITUR (HEATMAP)
+# ==========================================
+corr = df[['Fresh', 'Milk', 'Grocery', 'Frozen', 'Detergents_Paper', 'Delicassen']].corr()
+plt.figure(figsize=(6,5))
+sns.heatmap(corr, fmt=".2f", cmap="coolwarm")
+plt.title("Heatmap Korelasi")
+plt.show()
+
+# ==========================================
+# 4. DETEKSI OUTLIER
+# ==========================================
+fig, axes = plt.subplots(2, 3, figsize=(14, 8))
+features = ['Fresh', 'Milk', 'Grocery', 'Frozen', 'Detergents_Paper', 'Delicassen']
+
+for i, feat in enumerate(features):
+    ax = axes[i//3][i%3]
+    ax.boxplot(df[feat])
+    ax.set_title(feat)
+    ax.grid(alpha=0.3)
+
+plt.suptitle("Boxplot per Fitur — Deteksi Outlier", fontweight='bold')
+plt.tight_layout()
+plt.show()
+
+# Hitung jumlah outlier per fitur pakai IQR
+print("\\n=== Jumlah Outlier per Fitur (metode IQR) ===")
+for feat in features:
+    Q1 = df[feat].quantile(0.25)
+    Q3 = df[feat].quantile(0.75)
+    IQR = Q3 - Q1
+    outlier = df[(df[feat] < Q1 - 1.5*IQR) | (df[feat] > Q3 + 1.5*IQR)]
+    print(f"{feat:20s}: {len(outlier)} outlier")
+
+# ==========================================
+# 5. ELBOW METHOD UNTUK MENENTUKAN K
+# ==========================================
+X = df[['Fresh', 'Milk', 'Grocery', 'Frozen', 'Detergents_Paper', 'Delicassen']]
+X_array = X.to_numpy()
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_array)
+
+inertias = []
+K_range = range(1, 11)
+
+for k in K_range:
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+    kmeans.fit(X_scaled)
+    inertias.append(kmeans.inertia_)
+
+plt.style.use("dark_background")
+plt.figure(figsize=(8, 5))
+plt.plot(K_range, inertias, marker='o', color='purple')
+plt.xlabel("Jumlah Cluster (K)")
+plt.ylabel("Inertia")
+plt.title("Elbow Method untuk Menentukan K Optimal")
+plt.grid(True, alpha=0.3)
+plt.xticks(K_range)
+plt.show()
+
+# ==========================================
+# 6. PERBANDINGAN MODEL CLUSTERING
+# ==========================================
+# K-Means
+kmeans = KMeans(n_clusters=2, random_state=42, n_init=10)
+label_kmeans = kmeans.fit_predict(X_scaled)
+sil_kmeans = silhouette_score(X_scaled, label_kmeans)
+
+# Agglomerative
+agglo = AgglomerativeClustering(n_clusters=3)
+label_agglo = agglo.fit_predict(X_scaled)
+sil_agglo = silhouette_score(X_scaled, label_agglo)
+
+# DBSCAN
+dbscan = DBSCAN(eps=1.5, min_samples=5)
+label_dbscan = dbscan.fit_predict(X_scaled)
+sil_dbscan = silhouette_score(X_scaled, label_dbscan)
+
+print("\\n=== Perbandingan Silhouette Score ===")
+print(f"K-Means              : {sil_kmeans:.4f}")
+print(f"Agglomerative        : {sil_agglo:.4f}")
+print(f"DBSCAN               : {sil_dbscan:.4f}")
+
+# Cek Rata-Rata Karakteristik per Metode
+df['cluster_kmeans'] = label_kmeans
+print("\\nK-Means Rata-Rata:")
+print(df.groupby('cluster_kmeans')[features].mean().round(0))
+
+df['cluster_agglo'] = label_agglo
+print("\\nAgglomerative Rata-Rata:")
+print(df.groupby('cluster_agglo')[features].mean().round(0))
+
+df['cluster_dbscan'] = label_dbscan
+print("\\nDBSCAN Rata-Rata:")
+print(df.groupby('cluster_dbscan')[features].mean().round(0))
+
+# ==========================================
+# 7. PEMBUATAN PIPELINE FINAL (K-MEANS)
+# ==========================================
+model = Pipeline([
+    ('scaler', StandardScaler()),
+    ('kmeans', KMeans(n_clusters=2, random_state=42, n_init=10))
+])
+
+# Fit pipeline
+model.fit(X_array)
+labels = model.named_steps['kmeans'].labels_
+df['Cluster'] = labels
+
+# Visualisasi Hasil Clustering
+plt.style.use('dark_background')
+plt.figure(figsize=(9, 6))
+scatter = plt.scatter( 
+    df['Fresh'],
+    df['Grocery'], 
+    c=labels,
+    cmap='viridis',
+    s=80,
+    alpha=0.85
+)
+plt.xlabel("Fresh")
+plt.ylabel("Grocery")
+plt.title("Hasil Clustering Pelanggan (K=3)")
+plt.colorbar(scatter, label='Cluster')
+plt.grid(True, linestyle="--", alpha=0.3)
+plt.show()
+
+# Evaluasi Silhouette Pipeline Akhir
+X_scaled_final = model.named_steps['scaler'].transform(X_array)
+sil_score = silhouette_score(X_scaled_final, labels)
+print(f"\\nSilhouette Score Final: {sil_score:.4f}")
+
+# ==========================================
+# 8. SIMPAN MODEL
+# ==========================================
+joblib.dump(model, "cluster2.joblib")
+print("Model berhasil disimpan sebagai cluster2.joblib")
+'''
+
+    # Menampilkan keseluruhan kode di dalam aplikasi Streamlit
+    st.code(kode_pelatihan, language='python')
+    
