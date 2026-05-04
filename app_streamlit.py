@@ -576,7 +576,6 @@ df = pd.read_csv("Wholesale customers data.csv")
 print(df.head())
 print(df.tail())
 print(df.columns)
-print(df['Channel'].unique())
 print(df['Region'].unique())
 print(df.sample(5))
 
@@ -739,8 +738,8 @@ print(f"\\nSilhouette Score Final: {sil_score:.4f}")
 # ==========================================
 # 8. SIMPAN MODEL
 # ==========================================
-joblib.dump(model, "cluster2.joblib")
-print("Model berhasil disimpan sebagai cluster2.joblib")
+joblib.dump(model, "cluster3.joblib")
+print("Model berhasil disimpan sebagai cluster3.joblib")
 '''
 
     # Menampilkan keseluruhan kode di dalam aplikasi Streamlit
