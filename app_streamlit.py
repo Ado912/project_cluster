@@ -544,7 +544,7 @@ elif st.session_state.halaman == "Prediksi":
             """, unsafe_allow_html=True)
 
 elif st.session_state.halaman == "code":
-    elif st.session_state.halaman == "Kode Model":
+    
     st.markdown("""
         <h1 style="font-family:'Syne',sans-serif; font-weight:800;font-size: 2.2rem; color:#FFCCF2">
         Kode Pembuatan Model (Full)
