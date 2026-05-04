@@ -557,8 +557,11 @@ elif st.session_state.halaman == "code":
         </p>
     """, unsafe_allow_html=True)
 
-    # String yang berisi KESELURUHAN kode dari Jupyter Notebook
-    kode_pelatihan = '''import pandas as pd
+    # ==========================================
+    # IMPORT LIBRARY
+    # ==========================================
+    st.markdown("<h3 style='color:#FFCCF2;'>Import Library</h3>", unsafe_allow_html=True)
+    st.code('''import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -566,55 +569,59 @@ from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import silhouette_score
-import joblib
+import joblib''', language='python')
 
-# ==========================================
-# 1. LOAD DATA & EKSPLORASI AWAL
-# ==========================================
-df = pd.read_csv("Wholesale customers data.csv")
+    # ==========================================
+    # 1. LOAD DATA & EKSPLORASI AWAL
+    # ==========================================
+    st.markdown("<h3 style='color:#FFCCF2;'>1. Load Data & Eksplorasi Awal</h3>", unsafe_allow_html=True)
+    st.code('''df = pd.read_csv("Wholesale customers data.csv")
+print(df.head())''', language='python')
+    
+    st.code('print(df.tail())', language='python')
+    st.code('print(df.columns)', language='python')
+    st.code("print(df['Region'].unique())", language='python')
+    st.code('print(df.sample(5))', language='python')
 
-print(df.head())
-print(df.tail())
-print(df.columns)
-print(df['Region'].unique())
-print(df.sample(5))
-
-# ==========================================
-# 2. VISUALISASI DISTRIBUSI DATA
-# ==========================================
-sns.histplot(df["Channel"], kde=True)
+    # ==========================================
+    # 2. VISUALISASI DISTRIBUSI DATA
+    # ==========================================
+    st.markdown("<h3 style='color:#FFCCF2;'>2. Visualisasi Distribusi Data</h3>", unsafe_allow_html=True)
+    st.code('''sns.histplot(df["Channel"], kde=True)
 plt.title("Channel")
-plt.show()
+plt.show()''', language='python')
 
-sns.histplot(df['Fresh'], kde=True)
+    st.code('''sns.histplot(df['Fresh'], kde=True)
 plt.title("Fresh")
-plt.show()
+plt.show()''', language='python')
 
-sns.histplot(df['Milk'], kde=True)
+    st.code('''sns.histplot(df['Milk'], kde=True)
 plt.title("Milk")
-plt.show()
+plt.show()''', language='python')
 
-sns.histplot(df['Grocery'], kde=True)
+    st.code('''sns.histplot(df['Grocery'], kde=True)
 plt.title("Grocery")
-plt.show()
+plt.show()''', language='python')
 
-sns.histplot(df['Frozen'], kde=True)
+    st.code('''sns.histplot(df['Frozen'], kde=True)
 plt.title("Frozen")
-plt.show()
+plt.show()''', language='python')
 
-# ==========================================
-# 3. KORELASI ANTAR FITUR (HEATMAP)
-# ==========================================
-corr = df[['Fresh', 'Milk', 'Grocery', 'Frozen', 'Detergents_Paper', 'Delicassen']].corr()
+    # ==========================================
+    # 3. KORELASI ANTAR FITUR (HEATMAP)
+    # ==========================================
+    st.markdown("<h3 style='color:#FFCCF2;'>3. Korelasi Antar Fitur (Heatmap)</h3>", unsafe_allow_html=True)
+    st.code('''corr = df[['Fresh', 'Milk', 'Grocery', 'Frozen', 'Detergents_Paper', 'Delicassen']].corr()
 plt.figure(figsize=(6,5))
 sns.heatmap(corr, fmt=".2f", cmap="coolwarm")
 plt.title("Heatmap Korelasi")
-plt.show()
+plt.show()''', language='python')
 
-# ==========================================
-# 4. DETEKSI OUTLIER
-# ==========================================
-fig, axes = plt.subplots(2, 3, figsize=(14, 8))
+    # ==========================================
+    # 4. DETEKSI OUTLIER
+    # ==========================================
+    st.markdown("<h3 style='color:#FFCCF2;'>4. Deteksi Outlier</h3>", unsafe_allow_html=True)
+    st.code('''fig, axes = plt.subplots(2, 3, figsize=(14, 8))
 features = ['Fresh', 'Milk', 'Grocery', 'Frozen', 'Detergents_Paper', 'Delicassen']
 
 for i, feat in enumerate(features):
@@ -625,21 +632,22 @@ for i, feat in enumerate(features):
 
 plt.suptitle("Boxplot per Fitur — Deteksi Outlier", fontweight='bold')
 plt.tight_layout()
-plt.show()
+plt.show()''', language='python')
 
-# Hitung jumlah outlier per fitur pakai IQR
+    st.code('''# Hitung jumlah outlier per fitur pakai IQR
 print("\\n=== Jumlah Outlier per Fitur (metode IQR) ===")
 for feat in features:
     Q1 = df[feat].quantile(0.25)
     Q3 = df[feat].quantile(0.75)
     IQR = Q3 - Q1
     outlier = df[(df[feat] < Q1 - 1.5*IQR) | (df[feat] > Q3 + 1.5*IQR)]
-    print(f"{feat:20s}: {len(outlier)} outlier")
+    print(f"{feat:20s}: {len(outlier)} outlier")''', language='python')
 
-# ==========================================
-# 5. ELBOW METHOD UNTUK MENENTUKAN K
-# ==========================================
-X = df[['Fresh', 'Milk', 'Grocery', 'Frozen', 'Detergents_Paper', 'Delicassen']]
+    # ==========================================
+    # 5. ELBOW METHOD UNTUK MENENTUKAN K
+    # ==========================================
+    st.markdown("<h3 style='color:#FFCCF2;'>5. Elbow Method</h3>", unsafe_allow_html=True)
+    st.code('''X = df[['Fresh', 'Milk', 'Grocery', 'Frozen', 'Detergents_Paper', 'Delicassen']]
 X_array = X.to_numpy()
 
 scaler = StandardScaler()
@@ -661,12 +669,13 @@ plt.ylabel("Inertia")
 plt.title("Elbow Method untuk Menentukan K Optimal")
 plt.grid(True, alpha=0.3)
 plt.xticks(K_range)
-plt.show()
+plt.show()''', language='python')
 
-# ==========================================
-# 6. PERBANDINGAN MODEL CLUSTERING
-# ==========================================
-# K-Means
+    # ==========================================
+    # 6. PERBANDINGAN MODEL CLUSTERING
+    # ==========================================
+    st.markdown("<h3 style='color:#FFCCF2;'>6. Perbandingan Model Clustering</h3>", unsafe_allow_html=True)
+    st.code('''# K-Means
 kmeans = KMeans(n_clusters=2, random_state=42, n_init=10)
 label_kmeans = kmeans.fit_predict(X_scaled)
 sil_kmeans = silhouette_score(X_scaled, label_kmeans)
@@ -684,9 +693,9 @@ sil_dbscan = silhouette_score(X_scaled, label_dbscan)
 print("\\n=== Perbandingan Silhouette Score ===")
 print(f"K-Means              : {sil_kmeans:.4f}")
 print(f"Agglomerative        : {sil_agglo:.4f}")
-print(f"DBSCAN               : {sil_dbscan:.4f}")
+print(f"DBSCAN               : {sil_dbscan:.4f}")''', language='python')
 
-# Cek Rata-Rata Karakteristik per Metode
+    st.code('''# Cek Rata-Rata Karakteristik per Metode
 df['cluster_kmeans'] = label_kmeans
 print("\\nK-Means Rata-Rata:")
 print(df.groupby('cluster_kmeans')[features].mean().round(0))
@@ -697,12 +706,13 @@ print(df.groupby('cluster_agglo')[features].mean().round(0))
 
 df['cluster_dbscan'] = label_dbscan
 print("\\nDBSCAN Rata-Rata:")
-print(df.groupby('cluster_dbscan')[features].mean().round(0))
+print(df.groupby('cluster_dbscan')[features].mean().round(0))''', language='python')
 
-# ==========================================
-# 7. PEMBUATAN PIPELINE FINAL (K-MEANS)
-# ==========================================
-model = Pipeline([
+    # ==========================================
+    # 7. PEMBUATAN PIPELINE FINAL
+    # ==========================================
+    st.markdown("<h3 style='color:#FFCCF2;'>7. Pembuatan Pipeline Final (K-Means)</h3>", unsafe_allow_html=True)
+    st.code('''model = Pipeline([
     ('scaler', StandardScaler()),
     ('kmeans', KMeans(n_clusters=2, random_state=42, n_init=10))
 ])
@@ -710,9 +720,9 @@ model = Pipeline([
 # Fit pipeline
 model.fit(X_array)
 labels = model.named_steps['kmeans'].labels_
-df['Cluster'] = labels
+df['Cluster'] = labels''', language='python')
 
-# Visualisasi Hasil Clustering
+    st.code('''# Visualisasi Hasil Clustering
 plt.style.use('dark_background')
 plt.figure(figsize=(9, 6))
 scatter = plt.scatter( 
@@ -728,20 +738,17 @@ plt.ylabel("Grocery")
 plt.title("Hasil Clustering Pelanggan (K=3)")
 plt.colorbar(scatter, label='Cluster')
 plt.grid(True, linestyle="--", alpha=0.3)
-plt.show()
+plt.show()''', language='python')
 
-# Evaluasi Silhouette Pipeline Akhir
+    st.code('''# Evaluasi Silhouette Pipeline Akhir
 X_scaled_final = model.named_steps['scaler'].transform(X_array)
 sil_score = silhouette_score(X_scaled_final, labels)
-print(f"\\nSilhouette Score Final: {sil_score:.4f}")
+print(f"\\nSilhouette Score Final: {sil_score:.4f}")''', language='python')
 
-# ==========================================
-# 8. SIMPAN MODEL
-# ==========================================
-joblib.dump(model, "cluster3.joblib")
-print("Model berhasil disimpan sebagai cluster3.joblib")
-'''
-
-    # Menampilkan keseluruhan kode di dalam aplikasi Streamlit
-    st.code(kode_pelatihan, language='python')
+    # ==========================================
+    # 8. SIMPAN MODEL
+    # ==========================================
+    st.markdown("<h3 style='color:#FFCCF2;'>8. Simpan Model</h3>", unsafe_allow_html=True)
+    st.code('''joblib.dump(model, "cluster3.joblib")
+print("Model berhasil disimpan sebagai cluster3.joblib")''', language='python')
     
