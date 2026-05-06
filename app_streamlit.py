@@ -51,7 +51,8 @@ st.markdown("""
     .feature-card {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(244, 114, 182, 0.1);
-        padding: 20px;
+        padding: 12px;
+        padding-bottom: 10px;
         border-radius: 8px;
         height: 100%;
     }
