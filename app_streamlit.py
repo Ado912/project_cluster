@@ -93,6 +93,36 @@ tab_prediksi, tab_analisis, tab_kode, tab_about = st.tabs([
     "🔮 Prediksi", "📊 Analisis Data", "💻 Kode", "👤 About Me"
 ])
 
+col_v1, col_v2 = st.columns(2)
+        
+        with col_v1:
+            # 1. Radar Chart (Karakteristik Cluster)
+            st.markdown("#### Perbandingan Karakteristik")
+            avg_df = df.copy()
+            avg_df['Cluster'] = model.predict(df[FITUR].values)
+            c_mean = avg_df[avg_df['Cluster'] == prediction][FITUR].mean().values
+            
+            fig_radar = go.Figure()
+            fig_radar.add_trace(go.Scatterpolar(r=input_data[0], theta=FITUR, fill='toself', name='Data Anda', line_color='#F472B6'))
+            fig_radar.add_trace(go.Scatterpolar(r=c_mean, theta=FITUR, fill='toself', name='Rata-rata Cluster', line_color='rgba(255,255,255,0.2)'))
+            fig_radar.update_layout(polar=dict(radialaxis=dict(visible=False)), template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=300)
+            st.plotly_chart(fig_radar, use_container_width=True)
+
+        with col_v2:
+            # 2. Scatter Plot (Posisi Data)
+            st.markdown("#### Posisi Anda di Distribusi Data")
+            fig_pos = px.scatter(df, x="Fresh", y="Grocery", opacity=0.2, template="plotly_dark")
+            fig_pos.add_trace(go.Scatter(x=[fresh], y=[grocery], mode='markers', marker=dict(size=12, color='#F472B6', symbol='x'), name='Posisi Anda'))
+            fig_pos.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=300)
+            st.plotly_chart(fig_pos, use_container_width=True)
+
+        # 3. Bar Chart (Detail Perbandingan Global)
+        st.markdown("#### Perbandingan Detail Terhadap Rata-rata Global")
+        g_avg = df[FITUR].mean()
+        comp_df = pd.DataFrame({'Kategori': FITUR, 'Input Anda': input_data[0], 'Rata-rata Global': g_avg.values})
+        fig_bar = px.bar(comp_df, x='Kategori', y=['Input Anda', 'Rata-rata Global'], barmode='group', color_discrete_map={'Input Anda': '#F472B6', 'Rata-rata Global': '#4A5568'})
+        fig_bar.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=300)
+        st.plotly_chart(fig_bar, use_container_width=True)
 # ==========================================
 # TAB 1: PREDIKSI
 # ==========================================
