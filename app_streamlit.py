@@ -97,7 +97,7 @@ tab_prediksi, tab_analisis, tab_kode, tab_about = st.tabs([
 # TAB 1: PREDIKSI
 # ==========================================
 with tab_prediksi:
-    st.markdown("<h1>Prediksi Segmentasi Pelanggan</h1>")
+    st.markdown("Prediksi Segmentasi Pelanggan")
     st.markdown("### 📝 Parameter Pengeluaran")
     c1, c2, c3 = st.columns(3)
     with c1:
