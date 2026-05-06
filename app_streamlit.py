@@ -100,7 +100,7 @@ st.markdown("""
 # ─── SIDEBAR: LOGO GROMENT & PETUNJUK ─────────────────────
 with st.sidebar:
     # Menggunakan Link Image Logo yang telah dibuat
-    st.image("logo_groment.png", use_container_width=True)
+    
     st.markdown('<div class="logo-container"><span class="logo-text-groment">GROMENT</span></div>', unsafe_allow_html=True)
     
     st.markdown("### 📖 Panduan Prediksi")
