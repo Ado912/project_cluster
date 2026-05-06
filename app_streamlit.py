@@ -97,7 +97,7 @@ tab_prediksi, tab_analisis, tab_kode, tab_about = st.tabs([
 # TAB 1: PREDIKSI
 # ==========================================
 with tab_prediksi:
-    st.markdown("Prediksi Segmentasi Pelanggan")
+    st.markdown("<h1>Prediksi Segmentasi Pelanggan</h1>",unsafe_allow_html=True)
     st.markdown("### 📝 Parameter Pengeluaran")
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -147,7 +147,7 @@ with tab_prediksi:
 # TAB 2: ANALISIS DATA (UPDATE LENGKAP)
 # ==========================================
 with tab_analisis:
-    st.markdown("###Mengenal Sumber Data")
+    st.markdown("<h1>engenal Sumber Data</h1>",unsafe_allow_html=True)
     st.write("Sebelum melihat hasil kerja AI, mari kita pahami karakteristik data yang kita gunakan.")
     
     # 1. Konteks Data
@@ -215,7 +215,7 @@ with tab_analisis:
 # TAB 3: KODE
 # ==========================================
 with tab_kode:
-    st.markdown("<h1>Dokumentasi Kode Model</h1>")
+    st.markdown("<h1>Dokumentasi Kode Model</h1>",unsafe_allow_html=True)
     steps = [
         {"title": "1. Import Library", "code": "import pandas as pd\nfrom sklearn.cluster import KMeans", "out": "Libraries Loaded."},
         {"title": "2. Preprocessing", "code": "scaler = StandardScaler()\nX_scaled = scaler.fit_transform(df[FITUR])", "out": "Data Scaled."},
