@@ -127,22 +127,22 @@ with tab_prediksi:
 
         st.markdown("### 📈 Visualisasi Pendukung")
         col_v1, col_v2 = st.columns(2)
-        with col_v1:
+           with col_v1:
             # Radar Chart
-            avg_df = df.copy()
-            avg_df['Cluster'] = model.predict(df[FITUR].values)
-            c_mean = avg_df[avg_df['Cluster'] == prediction][FITUR].mean().values
-            fig_radar = go.Figure()
-            fig_radar.add_trace(go.Scatterpolar(r=input_data[0], theta=FITUR, fill='toself', name='Data Anda', line_color='#F472B6'))
-            fig_radar.add_trace(go.Scatterpolar(r=c_mean, theta=FITUR, fill='toself', name='Rata-rata Cluster', line_color='rgba(255,255,255,0.2)'))
-            fig_radar.update_layout(polar=dict(radialaxis=dict(visible=False)), template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=300)
-            st.plotly_chart(fig_radar, use_container_width=True)
-        with col_v2:
+                avg_df = df.copy()
+                avg_df['Cluster'] = model.predict(df[FITUR].values)
+                c_mean = avg_df[avg_df['Cluster'] == prediction][FITUR].mean().values
+                fig_radar = go.Figure()
+                fig_radar.add_trace(go.Scatterpolar(r=input_data[0], theta=FITUR, fill='toself', name='Data Anda', line_color='#F472B6'))
+                fig_radar.add_trace(go.Scatterpolar(r=c_mean, theta=FITUR, fill='toself', name='Rata-rata Cluster', line_color='rgba(255,255,255,0.2)'))
+                fig_radar.update_layout(polar=dict(radialaxis=dict(visible=False)), template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=300)
+                st.plotly_chart(fig_radar, use_container_width=True)
+           with col_v2:
             # Scatter Plot
-            fig_pos = px.scatter(df, x="Fresh", y="Grocery", opacity=0.2, template="plotly_dark")
-            fig_pos.add_trace(go.Scatter(x=[fresh], y=[grocery], mode='markers', marker=dict(size=12, color='#F472B6', symbol='x'), name='Posisi Anda'))
-            fig_pos.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=300)
-            st.plotly_chart(fig_pos, use_container_width=True)
+                fig_pos = px.scatter(df, x="Fresh", y="Grocery", opacity=0.2, template="plotly_dark")
+                fig_pos.add_trace(go.Scatter(x=[fresh], y=[grocery], mode='markers', marker=dict(size=12, color='#F472B6', symbol='x'), name='Posisi Anda'))
+                fig_pos.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=300)
+                st.plotly_chart(fig_pos, use_container_width=True)
 
 # ==========================================
 # TAB 2: ANALISIS DATA (UPDATE LENGKAP)
@@ -165,15 +165,15 @@ with tab_analisis:
     st.write("Berikut adalah 6 kategori produk utama yang menjadi dasar AI dalam mengelompokkan pelanggan:")
     
     f_c1, f_c2, f_c3 = st.columns(3) 
-    with f_c1: 
+        with f_c1: 
             st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur-sayur an, buah-buah an, dan daging segar harian.</div>', unsafe_allow_html=True) 
             st.markdown('<br>', unsafe_allow_html=True) 
             st.markdown('<div class="feature-card"><b>🧊 Frozen</b><br>Makanan beku seperti nugget,sosis,Bakso,Patty,Fish Roll,dll.</div>', unsafe_allow_html=True) 
-    with f_c2: 
+        with f_c2: 
             st.markdown('<div class="feature-card"><b>🥛 Milk</b><br>Produk olahan susu seperti keju dan yogurt.</div>', unsafe_allow_html=True) 
             st.markdown('<br>', unsafe_allow_html=True) 
             st.markdown('<div class="feature-card"><b>🧴 Detergents & Paper</b><br>Sabun, tisu, dan alat kebersihan.</div>', unsafe_allow_html=True)
-    with f_c3: 
+        with f_c3: 
             st.markdown('<div class="feature-card"><b>🛍️ Grocery</b><br>Sembako pokok seperti beras, minyak, dan tepung.</div>', unsafe_allow_html=True)
             st.markdown('<br>', unsafe_allow_html=True)
             st.markdown('<div class="feature-card"><b>🧀 Delicassen</b><br>Daging olahan premium dan makanan siap saji.</div>', unsafe_allow_html=True)
