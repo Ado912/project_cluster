@@ -165,15 +165,15 @@ with tab_analisis:
     st.write("Berikut adalah 6 kategori produk utama yang menjadi dasar AI dalam mengelompokkan pelanggan:")
     
     f_c1, f_c2, f_c3 = st.columns(3) 
-        with f_c1: 
+    with f_c1: 
             st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur-sayur an, buah-buah an, dan daging segar harian.</div>', unsafe_allow_html=True) 
             st.markdown('<br>', unsafe_allow_html=True) 
             st.markdown('<div class="feature-card"><b>🧊 Frozen</b><br>Makanan beku seperti nugget,sosis,Bakso,Patty,Fish Roll,dll.</div>', unsafe_allow_html=True) 
-        with f_c2: 
+    with f_c2: 
             st.markdown('<div class="feature-card"><b>🥛 Milk</b><br>Produk olahan susu seperti keju dan yogurt.</div>', unsafe_allow_html=True) 
             st.markdown('<br>', unsafe_allow_html=True) 
             st.markdown('<div class="feature-card"><b>🧴 Detergents & Paper</b><br>Sabun, tisu, dan alat kebersihan.</div>', unsafe_allow_html=True)
-        with f_c3: 
+    with f_c3: 
             st.markdown('<div class="feature-card"><b>🛍️ Grocery</b><br>Sembako pokok seperti beras, minyak, dan tepung.</div>', unsafe_allow_html=True)
             st.markdown('<br>', unsafe_allow_html=True)
             st.markdown('<div class="feature-card"><b>🧀 Delicassen</b><br>Daging olahan premium dan makanan siap saji.</div>', unsafe_allow_html=True)
