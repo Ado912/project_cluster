@@ -147,7 +147,7 @@ with tab_prediksi:
 # TAB 2: ANALISIS DATA (UPDATE LENGKAP)
 # ==========================================
 with tab_analisis:
-    st.markdown("<h1>engenal Sumber Data</h1>",unsafe_allow_html=True)
+    st.markdown("<h1>mengenal Sumber Data</h1>",unsafe_allow_html=True)
     st.write("Sebelum melihat hasil kerja AI, mari kita pahami karakteristik data yang kita gunakan.")
     
     # 1. Konteks Data
