@@ -225,9 +225,9 @@ with tab_analisis:
     st.markdown("## 🔥 Hubungan Antar Produk")
     col_h1, col_h2 = st.columns([1.5, 1])
     with col_h1:
-   	    fig_heat = px.imshow(df[FITUR].corr(), text_auto=".2f", color_continuous_scale="RdPu", template="plotly_dark")
-    	  fig_heat.update_layout(paper_bgcolor="rgba(0,0,0,0)")
-          st.plotly_chart(fig_heat, use_container_width=True)
+        fig_heat = px.imshow(df[FITUR].corr(), text_auto=".2f", color_continuous_scale="RdPu", template="plotly_dark")
+    	fig_heat.update_layout(paper_bgcolor="rgba(0,0,0,0)")
+        st.plotly_chart(fig_heat, use_container_width=True)
     with col_h2:
         st.markdown("### 💡 Fakta Menarik")
         st.write("""
