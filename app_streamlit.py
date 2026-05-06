@@ -150,8 +150,8 @@ with tab_prediksi:
 # ==========================================
 with tab_analisis:
     st.markdown("<h1>mengenal Sumber Data</h1>",unsafe_allow_html=True)
-    st.write(" mari kita pahami karakteristik data yang kita gunakan data ini diambil dai perilaku 440 pelanggan dari sebuat tempat di portugal dan model yang saya 
-            buat bisa membantu untuk memprediksi pelanggan termasuk tipe ***Retail***" atau pemilik ***Horeca*** dan membantu pengelola untuk mengatur stok di gudang.)
+    st.write(" mari kita pahami karakteristik data yang kita gunakan data ini diambil dai perilaku 440 pelanggan dari sebuat tempat di portugal dan model yang saya "
+            "buat bisa membantu untuk memprediksi pelanggan termasuk tipe ***Retail***" atau pemilik ***Horeca*** dan membantu pengelola untuk mengatur stok di gudang.)
     
     # 1. Konteks Data
     c_m1, c_m2, c_m3 = st.columns(3)
