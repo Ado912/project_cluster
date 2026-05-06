@@ -200,7 +200,7 @@ with tab_analisis:
     st.markdown("<h1>Analisis Dataset</h1>", unsafe_allow_html=True)
     st.write("Penjelasan dataset Wholesale Customers (UCI Repository).")
 
-      f_c1, f_c2, f_c3 = st.columns(3) 
+f_c1, f_c2, f_c3 = st.columns(3) 
     with f_c1: 
             st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur-sayur an, buah-buah an, dan daging segar harian.</div>', unsafe_allow_html=True) 
             st.markdown('<br>', unsafe_allow_html=True) 
