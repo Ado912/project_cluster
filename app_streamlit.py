@@ -51,7 +51,7 @@ st.markdown("""
     .feature-card {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(244, 114, 182, 0.1);
-        padding: 12px;
+        padding: 20px;
         border-radius: 8px;
         height: 100%;
     }
@@ -174,7 +174,7 @@ with tab_analisis:
         with f_c2: st.markdown('<div class="feature-card"><b>🧴 Detergents & Paper</b><br>Sabun, tisu, dan alat kebersihan.</div>', unsafe_allow_html=True)
     with f_c3:
         st.markdown('<div class="feature-card"><b>🛍️ Grocery</b><br>Sembako pokok seperti beras, minyak, dan tepung.</div>', unsafe_allow_html=True)
-
+        st.markdown('<br>', unsafe_allow_html=True)
         with f_c3: st.markdown('<div class="feature-card"><b>🧀 Delicassen</b><br>Daging olahan premium dan makanan siap saji.</div>', unsafe_allow_html=True)
 
     # 3. Tren Umum
