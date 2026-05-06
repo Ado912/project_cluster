@@ -222,13 +222,13 @@ with tab_analisis:
     fig_bar_all.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350, margin=dict(t=20))
     st.plotly_chart(fig_bar_all, use_container_width=True)
      # 4. Hubungan Antar Produk (Heatmap + Story)
-   st.markdown("### 🔥 Hubungan Antar Produk")
+    st.markdown("### 🔥 Hubungan Antar Produk")
     st.write("Produk dengan korelasi tinggi (warna pink cerah) sering dibeli secara bersamaan.")
     fig_heat = px.imshow(df[FITUR].corr(), text_auto=".2f", color_continuous_scale="RdPu", template="plotly_dark")
     fig_heat.update_layout(paper_bgcolor="rgba(0,0,0,0)")
     st.plotly_chart(fig_heat, use_container_width=True)
-        st.markdown("### 💡 Fakta Menarik")
-        st.write("""
+    st.markdown("### 💡 Fakta Menarik")
+    st.write("""
         Jika Anda melihat kotak yang sangat cerah antara **Grocery** dan **Detergents_Paper**, itu artinya:
     
         *Pelanggan yang membeli banyak sembako hampir pasti juga membeli banyak sabun dan tisu.*
