@@ -188,13 +188,13 @@ with tab_analisis:
     # 4. Hubungan Antar Produk (Heatmap + Story)
     st.markdown("## 🔥 Hubungan Antar Produk")
     col_h1, col_h2 = st.columns([1.5, 1])
-    with col_h1:
-        fig_heat = px.imshow(df[FITUR].corr(), text_auto=".2f", color_continuous_scale="RdPu", template="plotly_dark")
-        fig_heat.update_layout(paper_bgcolor="rgba(0,0,0,0)", margin=dict(t=0, b=0))
-        st.plotly_chart(fig_heat, use_container_width=True)
-    with col_h2:
-        st.markdown("### 💡 Fakta Menarik")
-        st.write("""
+        with col_h1:
+            fig_heat = px.imshow(df[FITUR].corr(), text_auto=".2f", color_continuous_scale="RdPu", template="plotly_dark")
+            fig_heat.update_layout(paper_bgcolor="rgba(0,0,0,0)", margin=dict(t=0, b=0))
+            st.plotly_chart(fig_heat, use_container_width=True)
+        with col_h2:
+            st.markdown("### 💡 Fakta Menarik")
+            st.write("""
         Jika Anda melihat kotak yang sangat cerah antara **Grocery** dan **Detergents_Paper**, itu artinya:
         
         *Pelanggan yang membeli banyak sembako hampir pasti juga membeli banyak sabun dan tisu.*
