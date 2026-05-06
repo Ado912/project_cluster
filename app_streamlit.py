@@ -199,7 +199,28 @@ with tab_prediksi:
 with tab_analisis:
     st.markdown("<h1>Analisis Dataset</h1>", unsafe_allow_html=True)
     st.write("Penjelasan dataset Wholesale Customers (UCI Repository).")
+
+      f_c1, f_c2, f_c3 = st.columns(3) 
+    with f_c1: 
+            st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur-sayur an, buah-buah an, dan daging segar harian.</div>', unsafe_allow_html=True) 
+            st.markdown('<br>', unsafe_allow_html=True) 
+            st.markdown('<div class="feature-card"><b>🧊 Frozen</b><br>Makanan beku seperti nugget,sosis,Bakso,Patty,Fish Roll,dll.</div>', unsafe_allow_html=True) 
+    with f_c2: 
+            st.markdown('<div class="feature-card"><b>🥛 Milk</b><br>Produk olahan susu seperti keju dan yogurt.</div>', unsafe_allow_html=True) 
+            st.markdown('<br>', unsafe_allow_html=True) 
+            st.markdown('<div class="feature-card"><b>🧴 Detergents & Paper</b><br>Sabun, tisu, dan alat kebersihan.</div>', unsafe_allow_html=True)
+    with f_c3: 
+            st.markdown('<div class="feature-card"><b>🛍️ Grocery</b><br>Sembako pokok seperti beras, minyak, dan tepung.</div>', unsafe_allow_html=True)
+            st.markdown('<br>', unsafe_allow_html=True)
+            st.markdown('<div class="feature-card"><b>🧀 Delicassen</b><br>Daging olahan premium dan makanan siap saji.</div>', unsafe_allow_html=True)
     
+    # 3. Tren Umum
+    st.markdown("## 📈 Produk Mana yang Paling Banyak Dibeli?")
+    st.write("Secara rata-rata, pelanggan menghabiskan uang paling banyak pada produk **Fresh** dan **Grocery**.")
+    mean_all = df[FITUR].mean().sort_values(ascending=False)
+    fig_bar_all = px.bar(mean_all, x=mean_all.index, y=mean_all.values, color=mean_all.values, color_continuous_scale="RdPu")
+    fig_bar_all.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350, margin=dict(t=20))
+    st.plotly_chart(fig_bar_all, use_container_width=True)
     # Heatmap Korelasi
     st.markdown("### 🔥 Hubungan Antar Produk")
     st.write("Produk dengan korelasi tinggi (warna pink cerah) sering dibeli secara bersamaan.")
