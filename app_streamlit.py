@@ -217,7 +217,7 @@ with tab_analisis:
     c2.metric("Jumlah Cluster", "2")
     c3.metric("Fitur Data", "6")
     c4.metric("Silhouette Score", "0.5483")
-    st.markdown("""
+    
     f_c1, f_c2, f_c3 = st.columns(3) 
     with f_c1: 
         st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur, buah, dan daging segar harian.</div>', unsafe_allow_html=True) 
@@ -253,7 +253,7 @@ with tab_analisis:
         *Pelanggan yang membeli banyak sembako hampir pasti juga membeli banyak sabun dan tisu.*
         
         Hal ini sangat logis karena Toko Kelontong biasanya menyetok kedua barang ini secara bersamaan untuk dijual kembali.
-        """)
+     """)
 
 # ==========================================
 # TAB 3: KODE (NOTEBOOK FULL)
