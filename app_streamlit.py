@@ -78,6 +78,13 @@ st.markdown("""
         margin-top: 10px;
     }
 
+    .feature-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(244, 114, 182, 0.1);
+        padding: 12px;
+        border-radius: 8px;
+        height: 100%;
+    }
     /* Notebook Style Cells */
     .notebook-cell {
         background-color: rgba(255, 255, 255, 0.02);
