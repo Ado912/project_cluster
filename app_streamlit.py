@@ -205,8 +205,15 @@ with tab_prediksi:
 # ==========================================
 with tab_analisis:
     st.markdown("<h1>Analisis Dataset</h1>", unsafe_allow_html=True)
-    st.write("Penjelasan dataset Wholesale Customers (UCI Repository).")
-
+    st.write("""Penjelasan dataset Wholesale Customers dataset ini saya Dapatkan dari ***UCI Machine Learning Repository***, Dataset ini berasal dari ***Portugas*** 
+               dari sebuah toko grosir dan dari kebiasaan 440 pelanggan dengan 8 features yaitu FRESH,MILK,GROCERY,FROZEN,DETERGENTS_PAPER,DELICATESSEN,CHANNEL
+               ,REGION namun saya tidak menggunakan region dan channel.""")
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Total Pelanggan", "400")
+    c2.metric("Jumlah Cluster", "2")
+    c3.metric("Fitur Data", "6")
+    c4.metric("Silhouette Score", "0.5483")
+    st.markdown("""
     f_c1, f_c2, f_c3 = st.columns(3) 
     with f_c1: 
         st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur, buah, dan daging segar harian.</div>', unsafe_allow_html=True) 
