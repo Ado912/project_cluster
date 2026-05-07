@@ -205,9 +205,13 @@ with tab_prediksi:
 # ==========================================
 with tab_analisis:
     st.markdown("<h1>Analisis Dataset</h1>", unsafe_allow_html=True)
-    st.write("""Penjelasan dataset Wholesale Customers dataset ini saya Dapatkan dari ***UCI Machine Learning Repository***, Dataset ini berasal dari ***Portugas*** 
-               dari sebuah toko grosir dan dari kebiasaan 440 pelanggan dengan 8 features yaitu FRESH,MILK,GROCERY,FROZEN,DETERGENTS_PAPER,DELICATESSEN,CHANNEL
-               ,REGION namun saya tidak menggunakan region dan channel.""")
+    st.write("""
+    Dataset **Wholesale Customers** ini saya dapatkan dari ***UCI Machine Learning Repository***. 
+    Data ini berasal dari sebuah distributor grosir di ***Portugal*** dan merekam kebiasaan belanja tahunan dari **440 pelanggan**.
+    
+    Data aslinya memiliki 8 fitur (kategori), yaitu: `FRESH`, `MILK`, `GROCERY`, `FROZEN`, `DETERGENTS_PAPER`, `DELICASSEN`, `CHANNEL`, dan `REGION`. 
+    Namun, pada pemodelan ini, saya **tidak menggunakan fitur Region dan Channel** agar model AI murni berfokus pada pola jumlah barang yang dibeli pelanggan.
+    """)
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Total Pelanggan", "400")
     c2.metric("Jumlah Cluster", "2")
