@@ -209,9 +209,9 @@ with tab_analisis:
 
     f_c1, f_c2, f_c3 = st.columns(3) 
     with f_c1: 
-        st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur-sayur an, buah-buah an, dan daging segar harian.</div>', unsafe_allow_html=True) 
+        st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur, buah, dan daging segar harian.</div>', unsafe_allow_html=True) 
         st.markdown('<br>', unsafe_allow_html=True) 
-        st.markdown('<div class="feature-card"><b>🧊 Frozen</b><br>Makanan beku seperti nugget,sosis,Bakso,Patty,Fish Roll,dll.</div>', unsafe_allow_html=True) 
+        st.markdown('<div class="feature-card"><b>🧊 Frozen</b><br>Makanan beku seperti nugget,Bakso,Patty,dll.</div>', unsafe_allow_html=True) 
     with f_c2: 
         st.markdown('<div class="feature-card"><b>🥛 Milk</b><br>Produk olahan susu seperti keju dan yogurt.</div>', unsafe_allow_html=True) 
         st.markdown('<br>', unsafe_allow_html=True) 
