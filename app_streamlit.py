@@ -217,8 +217,8 @@ with tab_analisis:
     c2.metric("Jumlah Cluster", "2")
     c3.metric("Fitur Data", "6")
     c4.metric("Silhouette Score", "0.5483")
-    st.write("""Dengan Machine Learning ini distribusi grosir bia menentukan langkah bisnis strategis karna sudah mengetahui target penjualannya dan bisa
-    menjaga stok gudang agar barang yang dibutuh kan tetap tersedia.""")
+    st.write("""Dengan Machine Learning ini distribusi grosir diharap kan bisa menentukan langkah bisnis strategis karna sudah mengetahui target penjualannya 
+    dan bisa menjaga stok gudang agar barang yang dibutuh kan tetap tersedia.""")
     f_c1, f_c2, f_c3 = st.columns(3) 
     with f_c1: 
         st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur, buah, dan daging segar harian.</div>', unsafe_allow_html=True) 
