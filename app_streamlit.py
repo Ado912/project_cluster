@@ -255,7 +255,20 @@ with tab_analisis:
         
         Hal ini sangat logis karena Toko Kelontong biasanya menyetok kedua barang ini secara bersamaan untuk dijual kembali.
      """)
-
+    # --- BAGIAN 2: KOMPOSISI PENJUALAN (DONUT CHART) ---
+    st.markdown("## 🍩 Porsi Penjualan Terbesar")
+    st.write("Jika dilihat dari total keseluruhan uang yang dibelanjakan oleh 440 pelanggan, ini adalah porsi masing-masing produk:")
+    
+    mean_all = df[FITUR].mean().sort_values(ascending=False)
+    fig_donut = px.pie(
+        names=mean_all.index, 
+        values=mean_all.values, 
+        hole=0.4, # Membuatnya jadi Donut Chart
+        color_discrete_sequence=px.colors.sequential.RdPu_r
+    )
+    fig_donut.update_traces(textposition='inside', textinfo='percent+label')
+    fig_donut.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=400, showlegend=False)
+    st.plotly_chart(fig_donut, use_container_width=True)
 # ==========================================
 # TAB 3: KODE (NOTEBOOK FULL)
 # ==========================================
@@ -272,20 +285,7 @@ with tab_kode:
         st.markdown(f'<div class="notebook-cell"><h3>{s["title"]}</h3>', unsafe_allow_html=True)
         st.code(s["code"], language="python")
         st.markdown(f'<div class="code-output">{s["out"]}</div></div>', unsafe_allow_html=True)
-# --- BAGIAN 2: KOMPOSISI PENJUALAN (DONUT CHART) ---
-    st.markdown("## 🍩 Porsi Penjualan Terbesar")
-    st.write("Jika dilihat dari total keseluruhan uang yang dibelanjakan oleh 440 pelanggan, ini adalah porsi masing-masing produk:")
-    
-    mean_all = df[FITUR].mean().sort_values(ascending=False)
-    fig_donut = px.pie(
-        names=mean_all.index, 
-        values=mean_all.values, 
-        hole=0.4, # Membuatnya jadi Donut Chart
-        color_discrete_sequence=px.colors.sequential.RdPu_r
-    )
-    fig_donut.update_traces(textposition='inside', textinfo='percent+label')
-    fig_donut.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=400, showlegend=False)
-    st.plotly_chart(fig_donut, use_container_width=True)
+
 # ==========================================
 # TAB 4: ABOUT ME
 # ==========================================
