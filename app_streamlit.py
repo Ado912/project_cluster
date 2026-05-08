@@ -212,6 +212,7 @@ with tab_analisis:
     Data aslinya memiliki 8 fitur (kategori), yaitu: `FRESH`, `MILK`, `GROCERY`, `FROZEN`, `DETERGENTS_PAPER`, `DELICASSEN`, `CHANNEL`, dan `REGION`. 
     Namun, pada pemodelan ini, saya **tidak menggunakan fitur Region dan Channel** agar model AI murni berfokus pada pola jumlah barang yang dibeli pelanggan.
     """)
+    st.markdown("<h1>Rangkuman Dataset dan Model</h1>", unsafe_allow_html=True)
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Total Pelanggan", "400")
     c2.metric("Jumlah Cluster", "2")
