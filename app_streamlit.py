@@ -256,6 +256,7 @@ with tab_analisis:
         Hal ini sangat logis karena Toko Kelontong biasanya menyetok kedua barang ini secara bersamaan untuk dijual kembali.
      """)
     # --- BAGIAN 2: KOMPOSISI PENJUALAN (DONUT CHART) ---
+    #"Dari 100% uang yang masuk ke grosir kita, 34%-nya berasal dari penjualan produk Fresh, disusul Grocery sebesar 25%."
     st.markdown("## 🍩 Porsi Penjualan Terbesar")
     st.write("Jika dilihat dari total keseluruhan uang yang dibelanjakan oleh 440 pelanggan, ini adalah porsi masing-masing produk:")
     
@@ -269,6 +270,18 @@ with tab_analisis:
     fig_donut.update_traces(textposition='inside', textinfo='percent+label')
     fig_donut.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=400, showlegend=False)
     st.plotly_chart(fig_donut, use_container_width=True)
+
+    # --- BAGIAN 3: OUTLIER (BOXPLOT) ---
+    st.markdown("## 📏 Rentang Belanja & Pelanggan 'Sultan'")
+    st.write("Setiap titik di sebelah kanan kotak menunjukkan pelanggan dengan kebiasaan belanja yang ekstrem (jauh di atas rata-rata normal).")
+    
+    fig_box = px.box(
+        df, y=FITUR, 
+        color_discrete_sequence=['#F472B6'],
+        orientation='v'
+    )
+    fig_box.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=400)
+    st.plotly_chart(fig_box, use_container_width=True)
 # ==========================================
 # TAB 3: KODE (NOTEBOOK FULL)
 # ==========================================
