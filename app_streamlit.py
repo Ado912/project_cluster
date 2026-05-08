@@ -233,7 +233,8 @@ with tab_analisis:
         st.markdown('<div class="feature-card"><b>🛍️ Grocery</b><br>Sembako pokok seperti beras, minyak, dan tepung.</div>', unsafe_allow_html=True)
         st.markdown('<br>', unsafe_allow_html=True)
         st.markdown('<div class="feature-card"><b>🧀 Delicassen</b><br>Daging olahan premium dan makanan siap saji.</div>', unsafe_allow_html=True)
-    
+
+    st.markdown("<h1>Visualisasi Dataset</h1>", unsafe_allow_html=True)
     # 3. Tren Umum
     st.markdown("## 📈 Produk Mana yang Paling Banyak Dibeli?")
     st.write("Secara rata-rata, pelanggan menghabiskan uang paling banyak pada produk **Fresh** dan **Grocery**.")
