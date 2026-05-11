@@ -197,13 +197,13 @@ with tab_prediksi:
             <h1 style='margin:0;'>{res['nama']}</h1>
         </div>
         """, unsafe_allow_html=True)
-      st.markdown(f"""
-        <div style="background: rgba(56,189,248,0.1); border-left: 4px solid #38BDF8; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+        st.markdown(f"""
+         <div style="background: rgba(56,189,248,0.1); border-left: 4px solid #38BDF8; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
             <h4 style="color: #38BDF8; margin-top: 0; margin-bottom: 10px;">💡 Rekomendasi Tindakan (Personalized)</h4>
             <p style="margin:0; font-size: 0.95rem;">Sistem mendeteksi bahwa fokus utama belanja pelanggan ini ada pada <b>{kategori_tertinggi}</b>.</p>
             <p style="margin: 8px 0 0 0; font-size: 0.95rem;"><b>Tindakan:</b> {saran_tindakan}</p>
-        </div>
-        """, unsafe_allow_html=True)
+         </div>
+          """, unsafe_allow_html=True)
         
         # VISUALISASI PENDUKUNG
         st.markdown("### 📈 Visualisasi Pendukung Prediksi")
