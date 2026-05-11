@@ -151,8 +151,8 @@ with tab_prediksi:
         prediction = model.predict(input_data)[0]
         
         cluster_info = {
-            0: {"nama": "Restaurant / HoReCa"},
-            1: {"nama": "Retail Store"}
+            0: {"nama": "Restaurant / HoReCa", "desc": "Segmen ini didominasi oleh pengeluaran bahan segar harian.", "recom": "Berikan penawaran bahan baku segar volume besar."},
+            1: {"nama": "Retail Store", "desc": "Segmen ini dominan pada produk Grocery dan kebutuhan rumah tangga.", "recom": "Tawarkan paket bundling sembako dan detergen."}
         }
         res = cluster_info[prediction]
 
@@ -162,7 +162,12 @@ with tab_prediksi:
             <h1 style='margin:0;'>{res['nama']}</h1>
         </div>
         """, unsafe_allow_html=True)
-
+        st.markdown(f"""
+        <div class="result-card">
+            <p>{res['desc']}</p>
+            <p style='color:#F472B6;'><b>Rekomendasi:</b> {res['recom']}</p>
+        </div>
+        """, unsafe_allow_html=True)
         st.markdown("---")
         
         # VISUALISASI PENDUKUNG (3 Visualisasi)
