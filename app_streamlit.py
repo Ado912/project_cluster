@@ -114,23 +114,42 @@ st.markdown("""
 
 # ─── SIDEBAR ───────────────────────────────────────────────
 with st.sidebar:
-    if os.path.exists("logo_groment.png"):
-        st.image("logo_groment.png", use_container_width=True)
-    else:
-        st.markdown('<div style="font-size:4rem; text-align:center; padding-top:20px;">🛍️</div>', unsafe_allow_html=True)
-        
-    st.markdown('<div class="logo-container"><span class="logo-text-groment">GROMENT</span></div>', unsafe_allow_html=True)
-    
-    st.markdown("### 📌 Navigasi Cepat")
+    # 1. LOGO BERBASIS TEKS (VINTAGE RETRO TECH STYLE)
     st.markdown("""
-    - Gunakan **Tab Prediksi** untuk menguji data baru.
-    - Lihat **Tab Analisis Data** untuk detail wawasan.
+    <div style="background-color: #00033D; padding: 25px 15px; border: 2px solid #FF2D78; box-shadow: 4px 4px 0px #FF2D78; text-align: center; margin-bottom: 30px; border-radius: 4px;">
+        <h1 style="color: #FF2D78 !important; font-family: 'Courier New', Courier, monospace; font-size: 2.2rem !important; font-weight: 900; margin: 0; letter-spacing: 2px; text-transform: uppercase; text-shadow: 2px 2px 0px rgba(0,0,0,0.8);">GROMENT</h1>
+        <p style="color: #E2E8F0; font-size: 0.75rem !important; letter-spacing: 2px; margin-top: 5px; font-weight: bold;">SEGMENTATION AI</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # 2. PANDUAN PENGGUNAAN
+    st.markdown("### ⚙️ Panel Kontrol")
+    st.info("""
+    **Cara Penggunaan:**
+    1. Input nilai belanja tahunan pelanggan.
+    2. Gunakan angka bulat (tanpa koma/titik).
+    3. Klik **Analisis Pola Sekarang**.
     """)
     
+    # 3. SPESIFIKASI MODEL (MENGISI KEKOSONGAN AGAR TERLIHAT PRO)
+    st.markdown("<hr style='border: 1px dashed #FF2D78; opacity: 0.5; margin: 25px 0;'>", unsafe_allow_html=True)
+    st.markdown("### 🧬 Spesifikasi Model")
     st.markdown("""
-    <div class="sidebar-info">
-        <h4 style="color:#38BDF8; margin-top:0; font-size:0.9rem;">💡 Tips Pengisian</h4>
-        Pastikan mengisi nominal dalam angka bulat tanpa titik/koma (Contoh: 15000). Satuan adalah <i>Monetary Units</i>.
+    <div style="background: rgba(255, 45, 120, 0.05); border-left: 3px solid #FF2D78; padding: 12px; border-radius: 4px;">
+        <ul style="margin:0; padding-left: 15px; font-size: 0.85rem; color: #CBD5E0; line-height: 1.8;">
+            <li><b>Algoritma:</b> K-Means Clustering</li>
+            <li><b>K-Value:</b> 2 (Segmen)</li>
+            <li><b>Scaler:</b> StandardScaler</li>
+            <li><b>Library:</b> Scikit-Learn</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # 4. FOOTER
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("""
+    <div style="text-align: center; color: #94A3B8; font-size: 0.75rem;">
+        &copy; 2026 | Built by <b>Sabdo Winarah</b>
     </div>
     """, unsafe_allow_html=True)
 
