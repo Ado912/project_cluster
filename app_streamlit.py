@@ -8,7 +8,8 @@ import plotly.graph_objects as go
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
-
+import nbformat
+import html
 # ─── KONFIGURASI HALAMAN ───────────────────────────────────
 st.set_page_config(
     page_title="GROMENT - Grosir Segmentation AI",
@@ -288,22 +289,86 @@ with tab_analisis:
     fig_box.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=400)
     st.plotly_chart(fig_box, use_container_width=True)
 # ==========================================
-# TAB 3: KODE (NOTEBOOK FULL)
+# TAB 3: KODE (NOTEBOOK RENDERER)
 # ==========================================
 with tab_kode:
-    st.markdown("<h1>Full Notebook Pipeline</h1>", unsafe_allow_html=True)
+    st.markdown("<h1>📓 Notebook Cell Viewer</h1>", unsafe_allow_html=True)
     
-    steps = [
-        {"title": "1. Import Library", "code": "import pandas as pd\nimport numpy as np\nfrom sklearn.cluster import KMeans", "out": "Libraries Loaded Successfully."},
-        {"title": "2. Data Preprocessing", "code": "scaler = StandardScaler()\nX_scaled = scaler.fit_transform(df[FITUR])", "out": "Data Normalized (StandardScaler)."},
-        {"title": "3. K-Means Training", "code": "model = KMeans(n_clusters=2, random_state=42)\nmodel.fit(X_scaled)", "out": "Model Fit: Cluster Centers Calculated."}
-    ]
+    # Ganti dengan nama file notebook Anda (clustering.ipynb)
+    nb_path = os.path.join(os.path.dirname(__file__), "clustering.ipynb")
     
-    for s in steps:
-        st.markdown(f'<div class="notebook-cell"><h3>{s["title"]}</h3>', unsafe_allow_html=True)
-        st.code(s["code"], language="python")
-        st.markdown(f'<div class="code-output">{s["out"]}</div></div>', unsafe_allow_html=True)
+    try:
+        with open(nb_path, "r", encoding="utf-8") as f:
+            nb = nbformat.read(f, as_version=4)
 
+        for i, cell in enumerate(nb.cells):
+            # ── Header cell ──────────────────────────────────────
+            tipe  = cell.cell_type
+            label = "🟦 Markdown" if tipe == "markdown" else "🟩 Code"
+            st.markdown(
+                f"""<div style="background:rgba(244, 114, 182, 0.05); border-left:3px solid #F472B6;
+                    padding:6px 14px; border-radius:6px; margin-bottom:4px;">
+                    <span style="color:#F472B6; font-size:12px; font-weight:600;">
+                    Cell [{i+1}]</span>
+                    <span style="color:rgba(255,255,255,0.4); font-size:12px;">
+                    &nbsp;·&nbsp;{label}</span>
+                </div>""",
+                unsafe_allow_html=True
+            )
+
+            # ── Isi cell ─────────────────────────────────────────
+            if tipe == "markdown":
+                st.markdown(cell.source)
+
+            elif tipe == "code":
+                st.code(cell.source, language="python")
+
+                # ── Output cell ───────────────────────────────────
+                for output in cell.get("outputs", []):
+
+                    # Teks / print
+                    if output.output_type == "stream":
+                        teks = html.escape(output.text)
+                        st.markdown(
+                            f"""<div style="background:#050505; border-radius:6px;
+                                padding:10px 14px; font-family:monospace;
+                                font-size:13px; color:#93C5FD;
+                                white-space:pre-wrap; margin-top:4px;">{teks}</div>""",
+                            unsafe_allow_html=True
+                        )
+
+                    elif output.output_type in ("display_data", "execute_result"):
+
+                        # Gambar
+                        if "image/png" in output.data:
+                            import base64
+                            img_data = output.data["image/png"]
+                            st.markdown(
+                                f'<img src="data:image/png;base64,{img_data}" '
+                                f'style="max-width:100%; border-radius:8px; margin-top:6px;">',
+                                unsafe_allow_html=True
+                            )
+
+                        # Tabel / teks HTML
+                        elif "text/html" in output.data:
+                            st.markdown(output.data["text/html"], unsafe_allow_html=True)
+
+                        # Teks Biasa
+                        elif "text/plain" in output.data:
+                            teks = html.escape(output.data["text/plain"])
+                            st.markdown(
+                                f"""<div style="background:#050505; border-radius:6px;
+                                    padding:10px 14px; font-family:monospace;
+                                    font-size:13px; color:#93C5FD;
+                                    white-space:pre-wrap; margin-top:4px;">{teks}</div>""",
+                                unsafe_allow_html=True
+                            )
+
+            st.markdown("<hr style='border:0.5px solid rgba(244, 114, 182, 0.2); margin:12px 0'>",
+                        unsafe_allow_html=True)
+                        
+    except FileNotFoundError:
+        st.error(f"File Notebook tidak ditemukan di: {nb_path}. Pastikan file 'clustering.ipynb' berada di folder yang sama dengan file app ini.")
 # ==========================================
 # TAB 4: ABOUT ME
 # ==========================================
