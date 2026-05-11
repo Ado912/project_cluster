@@ -114,7 +114,6 @@ st.markdown("""
 
 # ─── SIDEBAR ───────────────────────────────────────────────
 with st.sidebar:
-    # Perbaikan Gambar Logo (Aman jika gambar tidak ada)
     if os.path.exists("logo_groment.png"):
         st.image("logo_groment.png", use_container_width=True)
     else:
@@ -172,25 +171,25 @@ with tab_prediksi:
         input_data = np.array([[fresh, milk, grocery, frozen, detergents, delicassen]])
         prediction = model.predict(input_data)[0]
         
-    cluster_info = {
+        cluster_info = {
             0: {"nama": "Restaurant / HoReCa", "desc": "Segmen ini didominasi oleh pengeluaran bahan segar harian.", "recom": "Berikan penawaran bahan baku segar volume besar."},
             1: {"nama": "Retail Store", "desc": "Segmen ini dominan pada produk Grocery dan kebutuhan rumah tangga.", "recom": "Tawarkan paket bundling sembako dan detergen."}
         }
-    res = cluster_info[prediction]
+        res = cluster_info[prediction]
 
         # 1. Menggunakan st.metric untuk hasil utama sesuai saran guru
-    st.markdown("### 🎯 Hasil Analisis AI")
-    st.metric(label="Kategori Segmen Pelanggan", value=res['nama'])
+        st.markdown("### 🎯 Hasil Analisis AI")
+        st.metric(label="Kategori Segmen Pelanggan", value=res['nama'])
 
         # 2. Menggunakan komponen native Streamlit untuk teks insight
-    st.info(f"**📊 Karakteristik:** {res['desc']}")
-    st.success(f"**💡 Strategi Rekomendasi:** {res['recom']}")
+        st.info(f"**📊 Karakteristik:** {res['desc']}")
+        st.success(f"**💡 Strategi Rekomendasi:** {res['recom']}")
         
-    st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
+        st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
         
         # VISUALISASI PENDUKUNG
-    st.markdown("### 📈 Visualisasi Pendukung Prediksi")
-    col_v1, col_v2 = st.columns(2)
+        st.markdown("### 📈 Visualisasi Pendukung Prediksi")
+        col_v1, col_v2 = st.columns(2)
         
         with col_v1:
             avg_df = df.copy()
@@ -337,7 +336,6 @@ with tab_about:
     c_m1, c_m2 = st.columns([1, 3])
     
     with c_m1:
-        # Gunakan foto profil Anda jika ada, atau biarkan ilustrasi avatar ini
         if os.path.exists("profile.png"):
             st.image("profile.png", use_container_width=True)
         else:
