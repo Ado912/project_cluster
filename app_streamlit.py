@@ -45,7 +45,7 @@ st.markdown("""
     }
     
     /* Font Size Adjustments (Lebih Kecil & Rapi) */
-    h1 { font-size: 1.5rem !important; color: #F472B6 !important; font-weight: 800; margin-bottom: 1rem; }
+    h1 { font-size: 1.5rem !important; color: #F472B6 !important; font-weight: 800; margin-bottom: 1rem; text-align: center}
     h2 { font-size: 1.2rem !important; color: #F472B6 !important; font-weight: 700; }
     h3 { font-size: 1.0rem !important; color: #F472B6 !important; }
     p, li, label, div { font-size: 0.85rem !important; color: #CBD5E0; line-height: 1.4; }
@@ -159,7 +159,7 @@ with tab_prediksi:
         # Card Hasil Prediksi
         st.markdown(f"""
         <div class="result-card">
-            <h1 style='margin:0;'>Klasifikasi: {res['nama']}</h1>
+            <h1 style='margin:0;'>{res['nama']}</h1>
         </div>
         """, unsafe_allow_html=True)
 
