@@ -233,9 +233,9 @@ with tab_analisis:
         st.markdown('<br>', unsafe_allow_html=True) 
         st.markdown('<div class="feature-card"><b>🧴 Detergents & Paper</b><br>Sabun, tisu, dan alat kebersihan.</div>', unsafe_allow_html=True) 
     with f_c3: 
-        st.markdown('<div class="feature-card"><b>🛍️ Grocery</b><br>Sembako pokok seperti beras, minyak, dan tepung.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="feature-card"><b>🛍️ Grocery</b><br>Sembako seperti beras, minyak, dan tepung.</div>', unsafe_allow_html=True)
         st.markdown('<br>', unsafe_allow_html=True)
-        st.markdown('<div class="feature-card"><b>🧀 Delicassen</b><br>Daging olahan premium dan makanan siap saji.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="feature-card"><b>🧀 Delicassen</b><br>Daging premium dan makanan siap saji.</div>', unsafe_allow_html=True)
 
     st.markdown("<h1>Visualisasi Dataset</h1>", unsafe_allow_html=True)
     # 3. Tren Umum
