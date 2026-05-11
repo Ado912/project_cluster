@@ -177,15 +177,18 @@ with tab_prediksi:
         }
         res = cluster_info[prediction]
 
-        # 1. Menggunakan st.metric untuk hasil utama sesuai saran guru
-        st.markdown("### 🎯 Hasil Analisis AI")
-        st.metric(label="Kategori Segmen Pelanggan", value=res['nama'])
-
-        # 2. Menggunakan komponen native Streamlit untuk teks insight
-        st.info(f"**📊 Karakteristik:** {res['desc']}")
-        st.success(f"**💡 Strategi Rekomendasi:** {res['recom']}")
-        
-        st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
+         # Card Hasil Prediksi
+        st.markdown(f"""
+        <div class="result-card">
+            <h1 style='margin:0;'>{res['nama']}</h1>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown(f"""
+        <div class="result-card">
+            <p>{res['desc']}</p>
+            <p style='color:#F472B6;'><b>Rekomendasi:</b> {res['recom']}</p>
+        </div>
+        """, unsafe_allow_html=True)
         
         # VISUALISASI PENDUKUNG
         st.markdown("### 📈 Visualisasi Pendukung Prediksi")
