@@ -147,7 +147,7 @@ with tab_prediksi:
     # HERO SECTION BARU
     st.markdown("""
     <div class="hero-section">
-        <div class="hero-title">Segmentasi Pelanggan AI</div>
+        <div class="hero-title">Segmentasi Pelanggan ML</div>
         <div class="hero-subtitle">Menganalisis kebiasaan belanja distributor grosir menggunakan algoritma Machine Learning (K-Means) untuk menentukan strategi pemasaran yang akurat.</div>
     </div>
     """, unsafe_allow_html=True)
@@ -172,19 +172,20 @@ with tab_prediksi:
         input_data = np.array([[fresh, milk, grocery, frozen, detergents, delicassen]])
         prediction = model.predict(input_data)[0]
         
-        cluster_info = {
+      cluster_info = {
             0: {"nama": "Restaurant / HoReCa", "desc": "Segmen ini didominasi oleh pengeluaran bahan segar harian.", "recom": "Berikan penawaran bahan baku segar volume besar."},
             1: {"nama": "Retail Store", "desc": "Segmen ini dominan pada produk Grocery dan kebutuhan rumah tangga.", "recom": "Tawarkan paket bundling sembako dan detergen."}
         }
         res = cluster_info[prediction]
 
-        st.markdown(f"""
-        <div class="result-card">
-            <h2 style='margin:0; font-size:1.8rem;'>{res['nama']}</h2>
-            <p style='margin-top:10px; font-size:1rem !important;'>{res['desc']}</p>
-            <p style='color:#38BDF8; font-size:1rem !important; margin-bottom:0;'><b>💡 Strategi Rekomendasi:</b> {res['recom']}</p>
-        </div>
-        """, unsafe_allow_html=True)
+        # 1. Menggunakan st.metric untuk hasil utama sesuai saran guru
+        st.markdown("### 🎯 Hasil Analisis AI")
+        st.metric(label="Kategori Segmen Pelanggan", value=res['nama'])
+
+        # 2. Menggunakan komponen native Streamlit untuk teks insight
+        st.info(f"**📊 Karakteristik:** {res['desc']}")
+        st.success(f"**💡 Strategi Rekomendasi:** {res['recom']}")
+        
         st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
         
         # VISUALISASI PENDUKUNG
