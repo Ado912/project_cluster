@@ -198,7 +198,7 @@ with tab_prediksi:
         </div>
         """, unsafe_allow_html=True)
         st.markdown(f"""
-         <div style="background: rgba(56,189,248,0.1); border-left: 4px solid #38BDF8; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+         <div style="background: rgba(56,189,248,0.1); border-left: 4px solid #38BDF8; padding: 15px; border-radius: 6px; margin-bottom: 15px; margin-top:15px;">
             <h4 style="color: #38BDF8; margin-top: 0; margin-bottom: 10px;">💡 Rekomendasi Tindakan (Personalized)</h4>
             <p style="margin:0; font-size: 0.95rem;">Sistem mendeteksi bahwa fokus utama belanja pelanggan ini ada pada <b>{kategori_tertinggi}</b>.</p>
             <p style="margin: 8px 0 0 0; font-size: 0.95rem;"><b>Tindakan:</b> {saran_tindakan}</p>
