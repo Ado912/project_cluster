@@ -172,7 +172,7 @@ with tab_prediksi:
         input_data = np.array([[fresh, milk, grocery, frozen, detergents, delicassen]])
         prediction = model.predict(input_data)[0]
         
-      cluster_info = {
+    cluster_info = {
             0: {"nama": "Restaurant / HoReCa", "desc": "Segmen ini didominasi oleh pengeluaran bahan segar harian.", "recom": "Berikan penawaran bahan baku segar volume besar."},
             1: {"nama": "Retail Store", "desc": "Segmen ini dominan pada produk Grocery dan kebutuhan rumah tangga.", "recom": "Tawarkan paket bundling sembako dan detergen."}
         }
