@@ -176,17 +176,32 @@ with tab_prediksi:
             1: {"nama": "Retail Store", "desc": "Segmen ini dominan pada produk Grocery dan kebutuhan rumah tangga.", "recom": "Tawarkan paket bundling sembako dan detergen."}
         }
         res = cluster_info[prediction]
-
+# 2. LOGIKA DINAMIS: Cari pembelian paling tinggi dari input user
+        nama_kategori = ["Fresh (Produk Segar)", "Milk (Produk Susu)", "Grocery (Sembako)", "Frozen (Produk Beku)", "Detergents & Paper (Sabun/Tisu)", "Delicassen (Daging Premium/Siap Saji)"]
+        idx_tertinggi = np.argmax(input_data[0]) # Mencari index dengan nilai tertinggi
+        kategori_tertinggi = nama_kategori[idx_tertinggi]
+        
+        # 3. Buat Rekomendasi Spesifik Berdasarkan Kategori Tertinggi
+        aksi_spesifik = {
+            0: "Pastikan armada logistik pendingin (cold-chain) selalu siap, karena demand sayur/daging pelanggan ini sangat besar.",
+            1: "Tawarkan keanggotaan premium (supplier prioritas) untuk pasokan produk susu dan keju rutin dengan harga khusus.",
+            2: "Siapkan palet barang di area gudang yang mudah dijangkau armada. Pastikan stok sembako (beras/minyak) untuk pelanggan ini tidak pernah putus.",
+            3: "Pelanggan ini memiliki kapasitas *freezer* yang besar. Tawarkan promo *bundling* produk beku keluaran terbaru.",
+            4: "Tawarkan katalog produk kebersihan ukuran jerigen/karton besar (skala industri) untuk menekan harga beli mereka.",
+            5: "Tawarkan produk-produk impor atau daging olahan premium edisi terbatas untuk melengkapi etalase/menu spesial mereka."
+        }
+        saran_tindakan = aksi_spesifik[idx_tertinggi]
          # Card Hasil Prediksi
         st.markdown(f"""
         <div class="result-card">
             <h1 style='margin:0;'>{res['nama']}</h1>
         </div>
         """, unsafe_allow_html=True)
-        st.markdown(f"""
-        <div class="result-card">
-            <p>{res['desc']}</p>
-            <p style='color:#F472B6;'><b>Rekomendasi:</b> {res['recom']}</p>
+      st.markdown(f"""
+        <div style="background: rgba(56,189,248,0.1); border-left: 4px solid #38BDF8; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+            <h4 style="color: #38BDF8; margin-top: 0; margin-bottom: 10px;">💡 Rekomendasi Tindakan (Personalized)</h4>
+            <p style="margin:0; font-size: 0.95rem;">Sistem mendeteksi bahwa fokus utama belanja pelanggan ini ada pada <b>{kategori_tertinggi}</b>.</p>
+            <p style="margin: 8px 0 0 0; font-size: 0.95rem;"><b>Tindakan:</b> {saran_tindakan}</p>
         </div>
         """, unsafe_allow_html=True)
         
