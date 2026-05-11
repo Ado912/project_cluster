@@ -176,17 +176,17 @@ with tab_prediksi:
             0: {"nama": "Restaurant / HoReCa", "desc": "Segmen ini didominasi oleh pengeluaran bahan segar harian.", "recom": "Berikan penawaran bahan baku segar volume besar."},
             1: {"nama": "Retail Store", "desc": "Segmen ini dominan pada produk Grocery dan kebutuhan rumah tangga.", "recom": "Tawarkan paket bundling sembako dan detergen."}
         }
-        res = cluster_info[prediction]
+    res = cluster_info[prediction]
 
         # 1. Menggunakan st.metric untuk hasil utama sesuai saran guru
-        st.markdown("### 🎯 Hasil Analisis AI")
-        st.metric(label="Kategori Segmen Pelanggan", value=res['nama'])
+    st.markdown("### 🎯 Hasil Analisis AI")
+    st.metric(label="Kategori Segmen Pelanggan", value=res['nama'])
 
         # 2. Menggunakan komponen native Streamlit untuk teks insight
-        st.info(f"**📊 Karakteristik:** {res['desc']}")
-        st.success(f"**💡 Strategi Rekomendasi:** {res['recom']}")
+    st.info(f"**📊 Karakteristik:** {res['desc']}")
+    st.success(f"**💡 Strategi Rekomendasi:** {res['recom']}")
         
-        st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
+    st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
         
         # VISUALISASI PENDUKUNG
         st.markdown("### 📈 Visualisasi Pendukung Prediksi")
