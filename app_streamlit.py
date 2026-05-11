@@ -189,8 +189,8 @@ with tab_prediksi:
     st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
         
         # VISUALISASI PENDUKUNG
-        st.markdown("### 📈 Visualisasi Pendukung Prediksi")
-        col_v1, col_v2 = st.columns(2)
+    st.markdown("### 📈 Visualisasi Pendukung Prediksi")
+    col_v1, col_v2 = st.columns(2)
         
         with col_v1:
             avg_df = df.copy()
