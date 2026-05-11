@@ -10,11 +10,13 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 import nbformat
 import html
+
 # ─── KONFIGURASI HALAMAN ───────────────────────────────────
 st.set_page_config(
     page_title="GROMENT - Grosir Segmentation AI",
     page_icon="🛍️",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # ─── LOAD DATA & MODEL ─────────────────────────────────────
@@ -35,91 +37,103 @@ if not os.path.exists("cluster3.joblib"):
 
 model = joblib.load("cluster3.joblib")
 
-# ─── CUSTOM CSS (REVISI: SOFT COLORS, SMALL FONTS, LOGO) ──
+# ─── CUSTOM CSS (UI SUPERIOR) ──────────────────────────────
 st.markdown("""
 <style>
-    /* Main Theme: Modern Dark & Soft Pink */
+    /* Main Theme: Modern Dark */
     .stApp { 
-        background-color: #0E1117; 
+        background-color: #0B0E14; 
         color: #E2E8F0; 
         font-family: 'Inter', sans-serif;
     }
     
-    /* Font Size Adjustments (Lebih Kecil & Rapi) */
-    h1 { font-size: 1.5rem !important; color: #F472B6 !important; font-weight: 800; margin-bottom: 1rem; text-align: center}
-    h2 { font-size: 1.2rem !important; color: #F472B6 !important; font-weight: 700; }
-    h3 { font-size: 1.0rem !important; color: #F472B6 !important; }
-    p, li, label, div { font-size: 0.85rem !important; color: #CBD5E0; line-height: 1.4; }
+    /* Typography */
+    h1, h2, h3 { color: #F472B6 !important; font-family: 'Syne', sans-serif; }
+    p, li, label, div { font-size: 0.9rem !important; color: #CBD5E0; line-height: 1.5; }
     
+    /* Hero Banner di Tab Prediksi */
+    .hero-section {
+        background: linear-gradient(135deg, rgba(244,114,182,0.15) 0%, rgba(56,189,248,0.05) 100%);
+        border: 1px solid rgba(244, 114, 182, 0.2);
+        padding: 40px 30px;
+        border-radius: 16px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+    .hero-title { font-size: 2.2rem !important; font-weight: 800; color: #F472B6; margin-bottom: 10px; }
+    .hero-subtitle { font-size: 1.1rem !important; color: #94A3B8; max-width: 700px; margin: 0 auto; }
+
     /* Sidebar Styling */
     [data-testid="stSidebar"] { 
-        background-color: #161922; 
+        background-color: #12151C; 
         border-right: 1px solid rgba(244, 114, 182, 0.1); 
     }
-    
-    /* Logo Header di Sidebar */
-    .logo-container {
-        text-align: center;
-        padding: 10px 0 20px 0;
-    }
-    .logo-text-groment {
-        font-family: 'Syne', sans-serif;
-        font-size: 1.6rem !important;
-        font-weight: 800;
-        color: #F472B6;
-        letter-spacing: -1px;
-    }
+    .logo-container { text-align: center; padding: 10px 0 20px 0; }
+    .logo-text-groment { font-size: 2rem !important; font-weight: 800; color: #F472B6; letter-spacing: -1px; }
+    .sidebar-info { background: rgba(56,189,248,0.05); border-left: 3px solid #38BDF8; padding: 15px; border-radius: 6px; margin-top: 20px; }
 
-    /* Result Card */
+    /* Cards */
     .result-card {
-        background: rgba(244, 114, 182, 0.05);
-        border: 1px solid rgba(244, 114, 182, 0.3);
-        padding: 15px;
-        border-radius: 10px;
-        margin-top: 10px;
-    }
-
-    .feature-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(244, 114, 182, 0.1);
-        padding: 12px;
+        background: linear-gradient(to right, rgba(244, 114, 182, 0.05), rgba(0,0,0,0));
+        border-left: 4px solid #F472B6;
         border-radius: 8px;
+        padding: 20px;
+        margin-top: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .feature-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-top: 3px solid #F472B6;
+        padding: 20px;
+        border-radius: 10px;
         height: 100%;
+        transition: transform 0.2s;
     }
+    .feature-card:hover { transform: translateY(-5px); border-top: 3px solid #38BDF8; }
+
+    /* Skill Badges untuk About Me */
+    .skill-badge {
+        display: inline-block;
+        background: rgba(244, 114, 182, 0.1);
+        color: #F472B6;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem !important;
+        margin: 4px 4px 4px 0;
+        border: 1px solid rgba(244, 114, 182, 0.3);
+    }
+    .skill-badge.tech { background: rgba(56,189,248,0.1); color: #38BDF8; border-color: rgba(56,189,248,0.3); }
+
     /* Notebook Style Cells */
-    .notebook-cell {
-        background-color: rgba(255, 255, 255, 0.02);
-        border-left: 3px solid #F472B6;
-        padding: 15px;
-        border-radius: 4px;
-        margin-bottom: 10px;
-    }
-    .code-output {
-        background-color: #050505;
-        padding: 8px;
-        border-radius: 4px;
-        color: #93C5FD;
-        font-size: 0.75rem !important;
-        font-family: 'Courier New', monospace;
-    }
+    .notebook-cell { background-color: rgba(255, 255, 255, 0.02); border-left: 3px solid #F472B6; padding: 15px; border-radius: 4px; margin-bottom: 10px; }
+    .code-output { background-color: #050505; padding: 10px; border-radius: 6px; color: #93C5FD; font-size: 0.8rem !important; font-family: 'Courier New', monospace; }
 </style>
 """, unsafe_allow_html=True)
 
-# ─── SIDEBAR: LOGO GROMENT & PETUNJUK ─────────────────────
+# ─── SIDEBAR ───────────────────────────────────────────────
 with st.sidebar:
-    # Menggunakan Link Image Logo yang telah dibuat
-    st.image("http://googleusercontent.com/image_generation_content/1", use_container_width=True)
+    # Perbaikan Gambar Logo (Aman jika gambar tidak ada)
+    if os.path.exists("logo_groment.png"):
+        st.image("logo_groment.png", use_container_width=True)
+    else:
+        st.markdown('<div style="font-size:4rem; text-align:center; padding-top:20px;">🛍️</div>', unsafe_allow_html=True)
+        
     st.markdown('<div class="logo-container"><span class="logo-text-groment">GROMENT</span></div>', unsafe_allow_html=True)
     
-    st.markdown("### 📖 Panduan Prediksi")
-    st.info("""
-    1. Masukkan nilai pengeluaran tahunan pada grid di sebelah kanan.
-    2. Nilai harus berupa angka positif.
-    3. Klik tombol **Analisis** untuk memproses.
-    4. Perhatikan posisi data Anda pada grafik distribusi di bawah hasil.
+    st.markdown("### 📌 Navigasi Cepat")
+    st.markdown("""
+    - Gunakan **Tab Prediksi** untuk menguji data baru.
+    - Lihat **Tab Analisis Data** untuk detail wawasan.
     """)
-    st.markdown("---")
-    st.caption("Machine Learning Project by Sabdo Winarah")
+    
+    st.markdown("""
+    <div class="sidebar-info">
+        <h4 style="color:#38BDF8; margin-top:0; font-size:0.9rem;">💡 Tips Pengisian</h4>
+        Pastikan mengisi nominal dalam angka bulat tanpa titik/koma (Contoh: 15000). Satuan adalah <i>Monetary Units</i>.
+    </div>
+    """, unsafe_allow_html=True)
 
 # ─── MAIN CONTENT: TABS ───────────────────────────────────
 tab_prediksi, tab_analisis, tab_kode, tab_about = st.tabs([
@@ -127,25 +141,32 @@ tab_prediksi, tab_analisis, tab_kode, tab_about = st.tabs([
 ])
 
 # ==========================================
-# TAB 1: PREDIKSI (HALAMAN UTAMA)
+# TAB 1: PREDIKSI (DENGAN HERO SECTION)
 # ==========================================
 with tab_prediksi:
-    st.markdown("<h1>Prediksi Segmentasi Pelanggan</h1>", unsafe_allow_html=True)
+    # HERO SECTION BARU
+    st.markdown("""
+    <div class="hero-section">
+        <div class="hero-title">Segmentasi Pelanggan AI</div>
+        <div class="hero-subtitle">Menganalisis kebiasaan belanja distributor grosir menggunakan algoritma Machine Learning (K-Means) untuk menentukan strategi pemasaran yang akurat.</div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    # Input Grid Horizontal (3 Kolom x 2 Baris)
-    st.markdown("### 📝 Parameter Pengeluaran")
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        fresh = st.number_input("Fresh (Produk Segar)", 0, 150000, 10000)
-        frozen = st.number_input("Frozen (Produk Beku)", 0, 150000, 3000)
-    with c2:
-        milk = st.number_input("Milk (Produk Susu)", 0, 150000, 5000)
-        detergents = st.number_input("Detergents & Paper", 0, 150000, 2500)
-    with c3:
-        grocery = st.number_input("Grocery (Sembako)", 0, 150000, 8000)
-        delicassen = st.number_input("Delicassen", 0, 150000, 1500)
+    st.markdown("### 📝 Masukkan Parameter Belanja Pelanggan")
+    with st.container():
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            fresh = st.number_input("🥦 Fresh (Produk Segar)", 0, 150000, 12000)
+            frozen = st.number_input("🧊 Frozen (Produk Beku)", 0, 150000, 3000)
+        with c2:
+            milk = st.number_input("🥛 Milk (Produk Susu)", 0, 150000, 5000)
+            detergents = st.number_input("🧴 Detergents & Paper", 0, 150000, 2500)
+        with c3:
+            grocery = st.number_input("🛍️ Grocery (Sembako)", 0, 150000, 8000)
+            delicassen = st.number_input("🧀 Delicassen", 0, 150000, 1500)
 
-    btn_analisis = st.button("🚀 Analisis Sekarang", use_container_width=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+    btn_analisis = st.button("🚀 Analisis Pola Sekarang", use_container_width=True, type="primary")
 
     if btn_analisis:
         input_data = np.array([[fresh, milk, grocery, frozen, detergents, delicassen]])
@@ -157,230 +178,190 @@ with tab_prediksi:
         }
         res = cluster_info[prediction]
 
-        # Card Hasil Prediksi
         st.markdown(f"""
         <div class="result-card">
-            <h1 style='margin:0;'>{res['nama']}</h1>
+            <h2 style='margin:0; font-size:1.8rem;'>{res['nama']}</h2>
+            <p style='margin-top:10px; font-size:1rem !important;'>{res['desc']}</p>
+            <p style='color:#38BDF8; font-size:1rem !important; margin-bottom:0;'><b>💡 Strategi Rekomendasi:</b> {res['recom']}</p>
         </div>
         """, unsafe_allow_html=True)
-        st.markdown(f"""
-        <div class="result-card">
-            <p>{res['desc']}</p>
-            <p style='color:#F472B6;'><b>Rekomendasi:</b> {res['recom']}</p>
-        </div>
-        """, unsafe_allow_html=True)
-        st.markdown("---")
+        st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
         
-        # VISUALISASI PENDUKUNG (3 Visualisasi)
-        st.markdown("### 📈 Visualisasi Pendukung Jawaban")
+        # VISUALISASI PENDUKUNG
+        st.markdown("### 📈 Visualisasi Pendukung Prediksi")
         col_v1, col_v2 = st.columns(2)
         
         with col_v1:
-            # 1. Radar Chart (Karakteristik Cluster)
-            st.markdown("#### Perbandingan Karakteristik")
             avg_df = df.copy()
             avg_df['Cluster'] = model.predict(df[FITUR].values)
             c_mean = avg_df[avg_df['Cluster'] == prediction][FITUR].mean().values
             
             fig_radar = go.Figure()
-            fig_radar.add_trace(go.Scatterpolar(r=input_data[0], theta=FITUR, fill='toself', name='Data Anda', line_color='#F472B6'))
-            fig_radar.add_trace(go.Scatterpolar(r=c_mean, theta=FITUR, fill='toself', name='Rata-rata Cluster', line_color='rgba(255,255,255,0.2)'))
-            fig_radar.update_layout(polar=dict(radialaxis=dict(visible=False)), template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=300)
+            fig_radar.add_trace(go.Scatterpolar(r=input_data[0], theta=FITUR, fill='toself', name='Data Anda', line_color='#38BDF8'))
+            fig_radar.add_trace(go.Scatterpolar(r=c_mean, theta=FITUR, fill='toself', name='Rata-rata Cluster', line_color='rgba(244,114,182,0.4)'))
+            fig_radar.update_layout(polar=dict(radialaxis=dict(visible=False)), template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=320, margin=dict(t=30, b=30))
             st.plotly_chart(fig_radar, use_container_width=True)
 
         with col_v2:
-            # 2. Scatter Plot (Posisi Data)
-            st.markdown("#### Posisi Anda di Distribusi Data")
-            fig_pos = px.scatter(df, x="Fresh", y="Grocery", opacity=0.2, template="plotly_dark")
-            fig_pos.add_trace(go.Scatter(x=[fresh], y=[grocery], mode='markers', marker=dict(size=12, color='#F472B6', symbol='x'), name='Posisi Anda'))
-            fig_pos.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=300)
+            fig_pos = px.scatter(df, x="Fresh", y="Grocery", opacity=0.3, template="plotly_dark", color_discrete_sequence=["#475569"])
+            fig_pos.add_trace(go.Scatter(x=[fresh], y=[grocery], mode='markers', marker=dict(size=14, color='#38BDF8', symbol='star'), name='Posisi Anda'))
+            fig_pos.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=320, margin=dict(t=30, b=30))
             st.plotly_chart(fig_pos, use_container_width=True)
 
-        # 3. Bar Chart (Detail Perbandingan Global)
-        st.markdown("#### Perbandingan Detail Terhadap Rata-rata Global")
+        st.markdown("#### Detail Komparasi Global")
         g_avg = df[FITUR].mean()
         comp_df = pd.DataFrame({'Kategori': FITUR, 'Input Anda': input_data[0], 'Rata-rata Global': g_avg.values})
-        fig_bar = px.bar(comp_df, x='Kategori', y=['Input Anda', 'Rata-rata Global'], barmode='group', color_discrete_map={'Input Anda': '#F472B6', 'Rata-rata Global': '#4A5568'})
-        fig_bar.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=300)
+        fig_bar = px.bar(comp_df, x='Kategori', y=['Input Anda', 'Rata-rata Global'], barmode='group', color_discrete_map={'Input Anda': '#38BDF8', 'Rata-rata Global': '#475569'})
+        fig_bar.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=300)
         st.plotly_chart(fig_bar, use_container_width=True)
 
 # ==========================================
 # TAB 2: ANALISIS DATA
 # ==========================================
 with tab_analisis:
-    st.markdown("<h1>Analisis Dataset</h1>", unsafe_allow_html=True)
-    st.write("""
-    Dataset **Wholesale Customers** ini saya dapatkan dari ***UCI Machine Learning Repository***. 
-    Data ini berasal dari sebuah distributor grosir di ***Portugal*** dan merekam kebiasaan belanja tahunan dari **440 pelanggan**.
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("## 📊 Rangkuman Dataset & Kinerja Model")
     
-    Data aslinya memiliki 8 fitur (kategori), yaitu: `FRESH`, `MILK`, `GROCERY`, `FROZEN`, `DETERGENTS_PAPER`, `DELICASSEN`, `CHANNEL`, dan `REGION`. 
-    Namun, pada pemodelan ini, saya **tidak menggunakan fitur Region dan Channel** agar model AI murni berfokus pada pola jumlah barang yang dibeli pelanggan.
-    """)
-    st.markdown("<h1>Rangkuman Dataset dan Model</h1>", unsafe_allow_html=True)
+    # PERBAIKAN METRIC TOTAL PELANGGAN MENJADI 440
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Total Pelanggan", "400")
-    c2.metric("Jumlah Cluster", "2")
-    c3.metric("Fitur Data", "6")
+    c1.metric("Total Pelanggan", "440 Data")
+    c2.metric("Jumlah Cluster", "2 Segmen")
+    c3.metric("Fitur Observasi", "6 Kategori")
     c4.metric("Silhouette Score", "0.5483")
-    st.write("""Dengan Machine Learning ini distribusi grosir diharap kan bisa menentukan langkah bisnis strategis karna sudah mengetahui target penjualannya 
-    dan bisa menjaga stok gudang agar barang yang dibutuh kan tetap tersedia.""")
+    
+    st.write("""
+    Dengan implementasi Machine Learning ini, pihak manajemen grosir diharapkan mampu merumuskan langkah bisnis yang sangat strategis karena telah memahami target penjualannya secara presisi, serta menjaga stabilitas stok gudang agar barang yang tinggi permintaannya selalu tersedia.
+    """)
+    st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
+
+    st.markdown("### 🛒 Karakteristik Fitur Produk")
     f_c1, f_c2, f_c3 = st.columns(3) 
     with f_c1: 
-        st.markdown('<div class="feature-card"><b>🥦 Fresh</b><br>Sayur, buah, dan daging segar harian.</div>', unsafe_allow_html=True) 
+        st.markdown('<div class="feature-card"><span style="font-size:1.5rem;">🥦</span><br><b style="color:#F472B6; font-size:1.1rem;">Fresh</b><br>Sayur, buah, dan daging segar harian.</div>', unsafe_allow_html=True) 
         st.markdown('<br>', unsafe_allow_html=True) 
-        st.markdown('<div class="feature-card"><b>🧊 Frozen</b><br>Makanan beku seperti nugget,Bakso,Patty,dll.</div>', unsafe_allow_html=True) 
+        st.markdown('<div class="feature-card"><span style="font-size:1.5rem;">🧊</span><br><b style="color:#F472B6; font-size:1.1rem;">Frozen</b><br>Makanan beku (nugget, sosis, patty, dll).</div>', unsafe_allow_html=True) 
     with f_c2: 
-        st.markdown('<div class="feature-card"><b>🥛 Milk</b><br>Produk olahan susu seperti keju dan yogurt.</div>', unsafe_allow_html=True) 
+        st.markdown('<div class="feature-card"><span style="font-size:1.5rem;">🥛</span><br><b style="color:#F472B6; font-size:1.1rem;">Milk</b><br>Produk olahan susu seperti keju dan yogurt.</div>', unsafe_allow_html=True) 
         st.markdown('<br>', unsafe_allow_html=True) 
-        st.markdown('<div class="feature-card"><b>🧴 Detergents & Paper</b><br>Sabun, tisu, dan alat kebersihan.</div>', unsafe_allow_html=True) 
+        st.markdown('<div class="feature-card"><span style="font-size:1.5rem;">🧴</span><br><b style="color:#F472B6; font-size:1.1rem;">Detergents</b><br>Sabun, tisu, dan alat kebersihan.</div>', unsafe_allow_html=True) 
     with f_c3: 
-        st.markdown('<div class="feature-card"><b>🛍️ Grocery</b><br>Sembako seperti beras, minyak, dan tepung.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="feature-card"><span style="font-size:1.5rem;">🛍️</span><br><b style="color:#F472B6; font-size:1.1rem;">Grocery</b><br>Sembako pokok seperti beras, minyak, tepung.</div>', unsafe_allow_html=True)
         st.markdown('<br>', unsafe_allow_html=True)
-        st.markdown('<div class="feature-card"><b>🧀 Delicassen</b><br>Daging premium dan makanan siap saji.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="feature-card"><span style="font-size:1.5rem;">🧀</span><br><b style="color:#F472B6; font-size:1.1rem;">Delicassen</b><br>Daging premium dan makanan siap saji.</div>', unsafe_allow_html=True)
 
-    st.markdown("<h1>Visualisasi Dataset</h1>", unsafe_allow_html=True)
-    # 3. Tren Umum
-    st.markdown("## 📈 Produk Mana yang Paling Banyak Dibeli?")
-    st.write("Secara rata-rata, pelanggan menghabiskan uang paling banyak pada produk **Fresh** dan **Grocery**.")
-    mean_all = df[FITUR].mean().sort_values(ascending=False)
-    fig_bar_all = px.bar(mean_all, x=mean_all.index, y=mean_all.values, color=mean_all.values, color_continuous_scale="RdPu")
-    fig_bar_all.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350, margin=dict(t=20))
-    st.plotly_chart(fig_bar_all, use_container_width=True)
+    st.markdown("<hr style='border-color: rgba(255,255,255,0.05);'>", unsafe_allow_html=True)
+    st.markdown("## 📈 Insight Visualisasi Data")
     
-     # 4. Hubungan Antar Produk (Heatmap + Story)
-    st.markdown("### 🔥 Hubungan Antar Produk")
-    st.write("Produk dengan korelasi tinggi (warna pink cerah) sering dibeli secara bersamaan.")
-    fig_heat = px.imshow(df[FITUR].corr(), text_auto=".2f", color_continuous_scale="RdPu", template="plotly_dark")
-    fig_heat.update_layout(paper_bgcolor="rgba(0,0,0,0)")
-    st.plotly_chart(fig_heat, use_container_width=True)
-    st.markdown("### 💡 Fakta Menarik")
-    st.write("""
-        Jika Anda melihat kotak yang sangat cerah antara **Grocery** dan **Detergents_Paper**, itu artinya:
-    
-        *Pelanggan yang membeli banyak sembako hampir pasti juga membeli banyak sabun dan tisu.*
-        
-        Hal ini sangat logis karena Toko Kelontong biasanya menyetok kedua barang ini secara bersamaan untuk dijual kembali.
-     """)
-    # --- BAGIAN 2: KOMPOSISI PENJUALAN (DONUT CHART) ---
-    #"Dari 100% uang yang masuk ke grosir kita, 34%-nya berasal dari penjualan produk Fresh, disusul Grocery sebesar 25%."
-    st.markdown("## 🍩 Porsi Penjualan Terbesar")
-    st.write("Jika dilihat dari total keseluruhan uang yang dibelanjakan oleh 440 pelanggan, ini adalah porsi masing-masing produk:")
-    
-    mean_all = df[FITUR].mean().sort_values(ascending=False)
-    fig_donut = px.pie(
-        names=mean_all.index, 
-        values=mean_all.values, 
-        hole=0.4, # Membuatnya jadi Donut Chart
-        color_discrete_sequence=px.colors.sequential.RdPu_r
-    )
-    fig_donut.update_traces(textposition='inside', textinfo='percent+label')
-    fig_donut.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=400, showlegend=False)
-    st.plotly_chart(fig_donut, use_container_width=True)
+    col_a1, col_a2 = st.columns(2)
+    with col_a1:
+        st.markdown("#### Produk Paling Banyak Dibeli")
+        st.write("Rata-rata pengeluaran tertinggi jatuh pada produk **Fresh** dan **Grocery**.")
+        mean_all = df[FITUR].mean().sort_values(ascending=False)
+        fig_bar_all = px.bar(mean_all, x=mean_all.index, y=mean_all.values, color=mean_all.values, color_continuous_scale="RdPu")
+        fig_bar_all.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350, margin=dict(t=20))
+        st.plotly_chart(fig_bar_all, use_container_width=True)
 
-    # --- BAGIAN 3: OUTLIER (BOXPLOT) ---
-    st.markdown("## 📏 Rentang Belanja & Pelanggan 'Sultan'")
-    st.write("Setiap titik di sebelah kanan kotak menunjukkan pelanggan dengan kebiasaan belanja yang ekstrem (jauh di atas rata-rata normal).")
-    
-    fig_box = px.box(
-        df, y=FITUR, 
-        color_discrete_sequence=['#F472B6'],
-        orientation='v'
-    )
-    fig_box.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=400)
+    with col_a2:
+        st.markdown("#### Porsi Penjualan Terbesar")
+        st.write("Distribusi dari keseluruhan uang yang dibelanjakan oleh 440 pelanggan.")
+        fig_donut = px.pie(names=mean_all.index, values=mean_all.values, hole=0.5, color_discrete_sequence=px.colors.sequential.RdPu_r)
+        fig_donut.update_traces(textposition='inside', textinfo='percent+label')
+        fig_donut.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", height=350, showlegend=False, margin=dict(t=20))
+        st.plotly_chart(fig_donut, use_container_width=True)
+
+    st.markdown("#### 🔥 Hubungan Antar Produk (Heatmap)")
+    col_h1, col_h2 = st.columns([1.5, 1])
+    with col_h1:
+        fig_heat = px.imshow(df[FITUR].corr(), text_auto=".2f", color_continuous_scale="RdPu", template="plotly_dark")
+        fig_heat.update_layout(paper_bgcolor="rgba(0,0,0,0)", margin=dict(t=10, b=0))
+        st.plotly_chart(fig_heat, use_container_width=True)
+    with col_h2:
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.info("💡 **Fakta Menarik:**\n\nKorelasi yang sangat cerah (tinggi) antara **Grocery** dan **Detergents_Paper** menunjukkan bahwa *Pelanggan yang membeli banyak sembako hampir pasti memborong sabun dan tisu.*\n\nIni adalah indikator kuat dari pola belanja **Toko Kelontong/Retail** yang menyetok barang untuk dijual kembali.")
+
+    st.markdown("#### 📏 Rentang Belanja & Pelanggan 'Sultan'")
+    st.write("Setiap titik di luar kotak (sebelah kanan) adalah anomali pelanggan dengan daya beli sangat ekstrem. Ini menjadi alasan utama kenapa kita butuh Machine Learning untuk memisahkan segmentasi ini dengan akurat.")
+    fig_box = px.box(df, y=FITUR, color_discrete_sequence=['#38BDF8'], orientation='v')
+    fig_box.update_layout(template="plotly_dark", paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", height=350)
     st.plotly_chart(fig_box, use_container_width=True)
+
 # ==========================================
 # TAB 3: KODE (NOTEBOOK RENDERER)
 # ==========================================
 with tab_kode:
-    st.markdown("<h1>📓 Notebook Cell Viewer</h1>", unsafe_allow_html=True)
+    st.markdown("<h1>📓 Notebook Viewer</h1>", unsafe_allow_html=True)
     
-    # Ganti dengan nama file notebook Anda (clustering.ipynb)
     nb_path = os.path.join(os.path.dirname(__file__), "clustering.ipynb")
-    
     try:
         with open(nb_path, "r", encoding="utf-8") as f:
             nb = nbformat.read(f, as_version=4)
 
         for i, cell in enumerate(nb.cells):
-            # ── Header cell ──────────────────────────────────────
             tipe  = cell.cell_type
             label = "🟦 Markdown" if tipe == "markdown" else "🟩 Code"
             st.markdown(
                 f"""<div style="background:rgba(244, 114, 182, 0.05); border-left:3px solid #F472B6;
                     padding:6px 14px; border-radius:6px; margin-bottom:4px;">
-                    <span style="color:#F472B6; font-size:12px; font-weight:600;">
-                    Cell [{i+1}]</span>
-                    <span style="color:rgba(255,255,255,0.4); font-size:12px;">
-                    &nbsp;·&nbsp;{label}</span>
-                </div>""",
-                unsafe_allow_html=True
-            )
+                    <span style="color:#F472B6; font-size:12px; font-weight:600;">Cell [{i+1}]</span>
+                    <span style="color:rgba(255,255,255,0.4); font-size:12px;">&nbsp;·&nbsp;{label}</span>
+                </div>""", unsafe_allow_html=True)
 
-            # ── Isi cell ─────────────────────────────────────────
             if tipe == "markdown":
                 st.markdown(cell.source)
-
             elif tipe == "code":
                 st.code(cell.source, language="python")
-
-                # ── Output cell ───────────────────────────────────
                 for output in cell.get("outputs", []):
-
-                    # Teks / print
                     if output.output_type == "stream":
                         teks = html.escape(output.text)
-                        st.markdown(
-                            f"""<div style="background:#050505; border-radius:6px;
-                                padding:10px 14px; font-family:monospace;
-                                font-size:13px; color:#93C5FD;
-                                white-space:pre-wrap; margin-top:4px;">{teks}</div>""",
-                            unsafe_allow_html=True
-                        )
-
+                        st.markdown(f"""<div class="code-output">{teks}</div>""", unsafe_allow_html=True)
                     elif output.output_type in ("display_data", "execute_result"):
-
-                        # Gambar
                         if "image/png" in output.data:
                             import base64
                             img_data = output.data["image/png"]
-                            st.markdown(
-                                f'<img src="data:image/png;base64,{img_data}" '
-                                f'style="max-width:100%; border-radius:8px; margin-top:6px;">',
-                                unsafe_allow_html=True
-                            )
-
-                        # Tabel / teks HTML
+                            st.markdown(f'<img src="data:image/png;base64,{img_data}" style="max-width:100%; border-radius:8px; margin-top:6px;">', unsafe_allow_html=True)
                         elif "text/html" in output.data:
                             st.markdown(output.data["text/html"], unsafe_allow_html=True)
-
-                        # Teks Biasa
                         elif "text/plain" in output.data:
                             teks = html.escape(output.data["text/plain"])
-                            st.markdown(
-                                f"""<div style="background:#050505; border-radius:6px;
-                                    padding:10px 14px; font-family:monospace;
-                                    font-size:13px; color:#93C5FD;
-                                    white-space:pre-wrap; margin-top:4px;">{teks}</div>""",
-                                unsafe_allow_html=True
-                            )
-
-            st.markdown("<hr style='border:0.5px solid rgba(244, 114, 182, 0.2); margin:12px 0'>",
-                        unsafe_allow_html=True)
-                        
+                            st.markdown(f"""<div class="code-output">{teks}</div>""", unsafe_allow_html=True)
+            st.markdown("<hr style='border:0.5px solid rgba(244, 114, 182, 0.2); margin:12px 0'>", unsafe_allow_html=True)
     except FileNotFoundError:
-        st.error(f"File Notebook tidak ditemukan di: {nb_path}. Pastikan file 'clustering.ipynb' berada di folder yang sama dengan file app ini.")
+        st.error(f"File Notebook tidak ditemukan di: {nb_path}.")
+
 # ==========================================
-# TAB 4: ABOUT ME
+# TAB 4: ABOUT ME (PORTFOLIO STYLE)
 # ==========================================
 with tab_about:
-    c_m1, c_m2 = st.columns([1, 4])
+    st.markdown("<br>", unsafe_allow_html=True)
+    c_m1, c_m2 = st.columns([1, 3])
+    
     with c_m1:
-        st.image("https://via.placeholder.com/150x150.png?text=Sabdo", width=120)
+        # Gunakan foto profil Anda jika ada, atau biarkan ilustrasi avatar ini
+        if os.path.exists("profile.png"):
+            st.image("profile.png", use_container_width=True)
+        else:
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, #F472B6, #38BDF8); padding: 4px; border-radius: 50%; max-width: 200px; margin: 0 auto;">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sabdo&backgroundColor=0B0E14" style="border-radius: 50%; width: 100%; background: #0B0E14;">
+            </div>
+            """, unsafe_allow_html=True)
+            
     with c_m2:
         st.markdown(f"""
-        <div style="background:rgba(244, 114, 182, 0.05); padding:20px; border-radius:10px; border:1px solid rgba(244, 114, 182, 0.2);">
-            <h2 style='margin:0; color:#F472B6 !important;'>Sabdo Winarah</h2>
-            <p><b>Profesi:</b> Pelajar / ML Developer</p>
-            <p><b>Bio:</b> Fokus pada pengembangan solusi cerdas menggunakan Machine Learning. Project Groment ini adalah aplikasi segmentasi pasar berbasis data nyata.</p>
+        <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);">
+            <h1 style='margin:0; font-size:2.5rem; color:#F472B6 !important; text-align:left;'>Sabdo Winarah</h1>
+            <p style="color:#38BDF8; font-weight:600; font-size:1.1rem !important; margin-top:5px;">Pelajar SMK Negeri 1 Purbalingga | Full-Stack & ML Enthusiast</p>
+            <p style="margin-top: 15px;">Saya sangat tertarik pada pengembangan solusi digital, mulai dari UI/UX desain hingga arsitektur Machine Learning. Proyek Groment ini adalah implementasi praktis bagaimana algoritma Clustering dapat diterapkan untuk menyelesaikan studi kasus segmentasi pasar di dunia nyata.</p>
+            
+            <div style="margin-top: 20px;">
+                <h4 style="color:#F472B6; margin-bottom:10px;">Tech Stack & Skills</h4>
+                <span class="skill-badge">Machine Learning (Clustering)</span>
+                <span class="skill-badge tech">Python & Pandas</span>
+                <span class="skill-badge tech">Scikit-Learn</span>
+                <span class="skill-badge tech">Streamlit</span>
+                <span class="skill-badge tech">Next.js / React</span>
+                <span class="skill-badge tech">Tailwind CSS</span>
+                <span class="skill-badge">UI/UX (Figma)</span>
+            </div>
         </div>
         """, unsafe_allow_html=True)
