@@ -362,14 +362,13 @@ with tab_about:
             <p style="margin-top: 15px;">Saya sangat tertarik pada pengembangan solusi digital, mulai dari UI/UX desain hingga arsitektur Machine Learning. Proyek Groment ini adalah implementasi praktis bagaimana algoritma Clustering dapat diterapkan untuk menyelesaikan studi kasus segmentasi pasar di dunia nyata.</p>
             
             <div style="margin-top: 20px;">
-                <h4 style="color:#F472B6; margin-bottom:10px;">Tech Stack & Skills</h4>
-                <span class="skill-badge">Machine Learning (Clustering)</span>
-                <span class="skill-badge tech">Python & Pandas</span>
-                <span class="skill-badge tech">Scikit-Learn</span>
-                <span class="skill-badge tech">Streamlit</span>
-                <span class="skill-badge tech">Next.js / React</span>
-                <span class="skill-badge tech">Tailwind CSS</span>
-                <span class="skill-badge">UI/UX (Figma)</span>
-            </div>
+    <h4 style="color:#F472B6; margin-bottom:10px;">Tech Stack & Skills</h4>
+    <span class="skill-badge">Machine Learning (K-Means)</span>
+    <span class="skill-badge tech">Python & Pandas</span>
+    <span class="skill-badge tech">Streamlit</span>
+    <span class="skill-badge tech">HTML5 & CSS3</span>
+    <span class="skill-badge tech">JavaScript</span>
+    <span class="skill-badge">Data Visualization</span>
+</div>
         </div>
         """, unsafe_allow_html=True)
