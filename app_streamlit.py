@@ -396,6 +396,7 @@ with tab_about:
             <p style="color:#38BDF8; font-weight:600; font-size:1.1rem !important; margin-top:5px;">Pelajar SMK Negeri 1 Purbalingga | Full-Stack & ML Enthusiast</p>
             <p style="margin-top: 15px;">Saya sangat tertarik pada pengembangan solusi digital, mulai dari UI/UX desain hingga arsitektur Machine Learning. Proyek Groment ini adalah implementasi praktis bagaimana algoritma Clustering dapat diterapkan untuk menyelesaikan studi kasus segmentasi pasar di dunia nyata.</p>
             
+        </div>
             <div style="margin-top: 20px;">
                 <h4 style="color:#F472B6; margin-bottom:10px;">Tech Stack & Skills</h4>
                 
@@ -409,5 +410,4 @@ with tab_about:
                 
                 <span style="display:inline-block; background:rgba(244,114,182,0.1); color:#F472B6; padding:4px 12px; border-radius:20px; font-size:0.8rem; margin:4px 4px 4px 0; border:1px solid rgba(244,114,182,0.3);">UI/UX (Figma, Canva)</span>
             </div>
-        </div>
         """, unsafe_allow_html=True)
