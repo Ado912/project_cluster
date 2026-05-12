@@ -115,13 +115,13 @@ st.markdown("""
 
 # ─── SIDEBAR ───────────────────────────────────────────────
 with st.sidebar:
-    # 1. LOGO BERBASIS TEKS (VINTAGE RETRO TECH STYLE)
-    st.markdown("""
-    <div style="background-color: #00033D; padding: 25px 15px; border: 2px solid #FF2D78; box-shadow: 4px 4px 0px #FF2D78; text-align: center; margin-bottom: 30px; border-radius: 4px;">
-        <h1 style="color: #FF2D78 !important; font-family: 'Courier New', Courier, monospace; font-size: 2.2rem !important; font-weight: 900; margin: 0; letter-spacing: 2px; text-transform: uppercase; text-shadow: 2px 2px 0px rgba(0,0,0,0.8);">GROMENT</h1>
-        <p style="color: #E2E8F0; font-size: 0.75rem !important; letter-spacing: 2px; margin-top: 5px; font-weight: bold;">SEGMENTATION AI</p>
-    </div>
-    """, unsafe_allow_html=True)
+    # Memanggil logo baru Anda
+    if os.path.exists("logo.png"):
+        st.image("logo.png", use_container_width=True)
+    else:
+        # Jika gambar gagal dimuat, tampilkan teks cadangan
+        st.markdown('<div style="font-size:4rem; text-align:center; padding-top:20px;">🛍️</div>', unsafe_allow_html=True)
+        st.markdown('<div class="logo-container"><span class="logo-text-groment" style="color:#F472B6; font-size:2rem; font-weight:bold;">GROMENT</span></div>', unsafe_allow_html=True)
     
     # 2. PANDUAN PENGGUNAAN
     st.markdown("### ⚙️ Panel Kontrol")
