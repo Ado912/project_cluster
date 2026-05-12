@@ -379,8 +379,8 @@ with tab_about:
     c_m1, c_m2 = st.columns([1, 3])
     
     with c_m1:
-        if os.path.exists("profile.png"):
-            st.image("profile.png", use_container_width=True)
+        if os.path.exists("prime.png"):
+            st.image("prime.png", use_container_width=True)
         else:
             st.markdown("""
             <div style="background: linear-gradient(135deg, #F472B6, #38BDF8); padding: 4px; border-radius: 50%; max-width: 200px; margin: 0 auto;">
