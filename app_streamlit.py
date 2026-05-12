@@ -384,7 +384,7 @@ with tab_about:
         else:
             st.markdown("""
             <div style="background: linear-gradient(135deg, #F472B6, #38BDF8); padding: 4px; border-radius: 50%; max-width: 200px; margin: 0 auto;">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sabdo&backgroundColor=0B0E14" style="border-radius: 50%; width: 100%; background: #0B0E14;">
+                <img src="prime.png" style="border-radius: 50%; width: 100%; background: #0B0E14;">
             </div>
             """, unsafe_allow_html=True)
             
