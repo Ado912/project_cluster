@@ -94,6 +94,7 @@ st.markdown("""
     .feature-card:hover { transform: translateY(-5px); border-top: 3px solid #38BDF8; }
 
     /* Skill Badges untuk About Me */
+    /* Skill Badges untuk About Me */
     .skill-badge {
         display: inline-block;
         background: rgba(244, 114, 182, 0.1);
