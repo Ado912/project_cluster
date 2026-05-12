@@ -389,7 +389,7 @@ with tab_about:
             </div>
             """, unsafe_allow_html=True)
             
-   with c_m2:
+    with c_m2:
         st.markdown(f"""
         <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);">
             <h1 style='margin:0; font-size:2.5rem; color:#F472B6 !important; text-align:left;'>Sabdo Winarah</h1>
