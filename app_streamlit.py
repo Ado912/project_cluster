@@ -395,14 +395,18 @@ with tab_about:
             <p style="color:#38BDF8; font-weight:600; font-size:1.1rem !important; margin-top:5px;">Pelajar SMK Negeri 1 Purbalingga | Full-Stack & ML Enthusiast</p>
             <p style="margin-top: 15px;">Saya sangat tertarik pada pengembangan solusi digital, mulai dari UI/UX desain hingga arsitektur Machine Learning. Proyek Groment ini adalah implementasi praktis bagaimana algoritma Clustering dapat diterapkan untuk menyelesaikan studi kasus segmentasi pasar di dunia nyata.</p>
             
-            <div style="margin-top: 20px;">
+       <div style="margin-top: 20px;">
     <h4 style="color:#F472B6; margin-bottom:10px;">Tech Stack & Skills</h4>
-    <span class="skill-badge">Machine Learning (K-Means)</span>
+    
+    <span class="skill-badge">Machine Learning (K-Means, CatBoost)</span>
+    <span class="skill-badge">Data Science & Visualization</span>
+    
     <span class="skill-badge tech">Python & Pandas</span>
-    <span class="skill-badge tech">Streamlit</span>
-    <span class="skill-badge tech">HTML5 & CSS3</span>
-    <span class="skill-badge tech">JavaScript</span>
-    <span class="skill-badge">Data Visualization</span>
-</div>
-        </div>
+    <span class="skill-badge tech">Streamlit & Gradio</span>
+    <span class="skill-badge tech">PHP & Next.js / React</span>
+    
+    <span class="skill-badge tech">HTML, CSS, JavaScript</span>
+    <span class="skill-badge tech">Tailwind CSS & Bootstrap</span>
+    <span class="skill-badge">UI/UX Design (Figma, Canva)</span>
+</div></div>
         """, unsafe_allow_html=True)
