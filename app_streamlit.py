@@ -438,6 +438,7 @@ with tab_about:
                 
                 <a href="mailto:EMAIL_KAMU@gmail.com" class="social-badge">
                     📧 Email
-                </a></div>
+                </a>
+            </div>
         </div>
         """, unsafe_allow_html=True)
