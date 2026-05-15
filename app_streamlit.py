@@ -398,7 +398,7 @@ with tab_about:
             <p style="margin-top: 15px;">Saya sangat tertarik pada pengembangan solusi digital, mulai dari UI/UX desain hingga arsitektur Machine Learning. Proyek Groment ini adalah implementasi praktis bagaimana algoritma Clustering dapat diterapkan untuk menyelesaikan studi kasus segmentasi pasar di dunia nyata.</p>
             
         
-        <div style="margin-top: 20px;">
+            <div style="margin-top: 20px;">
                 <h4 style="color:#F472B6; margin-bottom:10px;">Tech Stack & Skills</h4>
                 
                 <span style="display:inline-block; background:rgba(244,114,182,0.1); color:#F472B6; padding:4px 12px; border-radius:20px; font-size:0.8rem; margin:4px 4px 4px 0; border:1px solid rgba(244,114,182,0.3);">Machine Learning (K-Means, CatBoost)</span>
@@ -410,8 +410,8 @@ with tab_about:
                 <span style="display:inline-block; background:rgba(56,189,248,0.1); color:#38BDF8; padding:4px 12px; border-radius:20px; font-size:0.8rem; margin:4px 4px 4px 0; border:1px solid rgba(56,189,248,0.3);">Tailwind & Bootstrap</span>
                 
                 <span style="display:inline-block; background:rgba(244,114,182,0.1); color:#F472B6; padding:4px 12px; border-radius:20px; font-size:0.8rem; margin:4px 4px 4px 0; border:1px solid rgba(244,114,182,0.3);">UI/UX (Figma, Canva)</span>
-        </div>
-        <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+            </div>
+            <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
                 <h4 style="color:#CBD5E0; margin-bottom:15px; font-size:0.9rem;">Mari Terhubung:</h4>
                 
                 <a href="https://instagram.com/USERNAME_IG_KAMU" target="_blank" style="text-decoration:none; display:inline-block; background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:white; padding:8px 16px; border-radius:8px; font-size:0.85rem; font-weight:bold; margin-right:10px; margin-bottom:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
