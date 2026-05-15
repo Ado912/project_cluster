@@ -373,24 +373,24 @@ with tab_kode:
     except FileNotFoundError:
         st.error(f"File Notebook tidak ditemukan di: {nb_path}.")
 
- # ==========================================
+# ==========================================
 # TAB 4: ABOUT ME (PORTFOLIO STYLE)
 # ==========================================
 with tab_about:
-    st.markdown("<br>", unsafe_allow_html=True)
-    c_m1, c_m2 = st.columns([1, 3])
-    
-    with c_m1:
-        if os.path.exists("prime.png"):
-            st.image("prime.png", use_container_width=True)
-        else:
-            st.markdown("""
-            <div style="background: linear-gradient(135deg, #F472B6, #38BDF8); padding: 4px; border-radius: 50%; max-width: 200px; margin: 0 auto;">
-                <img src="prime.png" style="border-radius: 50%; width: 100%; background: #0B0E14;">
-            </div>
-            """, unsafe_allow_html=True)
-            
-    with c_m2:
+    st.markdown("<br>", unsafe_allow_html=True)
+    c_m1, c_m2 = st.columns([1, 3])
+    
+    with c_m1:
+        if os.path.exists("prime.png"):
+            st.image("prime.png", use_container_width=True)
+        else:
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, #F472B6, #38BDF8); padding: 4px; border-radius: 50%; max-width: 200px; margin: 0 auto;">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sabdo&backgroundColor=0B0E14" style="border-radius: 50%; width: 100%; background: #0B0E14;">
+            </div>
+            """, unsafe_allow_html=True)
+            
+    with c_m2:
         st.markdown(f"""
         <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);">
             <h1 style='margin:0; font-size:2.5rem; color:#F472B6 !important; text-align:left;'>Sabdo Winarah</h1>
@@ -414,4 +414,3 @@ with tab_about:
             </div>
         </div>
         """, unsafe_allow_html=True)
- 
