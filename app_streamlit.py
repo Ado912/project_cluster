@@ -107,6 +107,26 @@ st.markdown("""
     }
     .skill-badge.tech { background: rgba(56,189,248,0.1); color: #38BDF8; border-color: rgba(56,189,248,0.3); }
 
+/* Gaya Tombol Sosial Media Bergaya Badge yang Konsisten */
+    .social-badge {
+        display: inline-block;
+        background: rgba(56, 189, 248, 0.1);
+        color: #38BDF8;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 0.85rem !important;
+        font-weight: bold;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+    .social-badge:hover {
+        background: rgba(56, 189, 248, 0.2);
+        border-color: #38BDF8;
+        color: #FFFFFF;
+    }
     /* Notebook Style Cells */
     .notebook-cell { background-color: rgba(255, 255, 255, 0.02); border-left: 3px solid #F472B6; padding: 15px; border-radius: 4px; margin-bottom: 10px; }
     .code-output { background-color: #050505; padding: 10px; border-radius: 6px; color: #93C5FD; font-size: 0.8rem !important; font-family: 'Courier New', monospace; }
