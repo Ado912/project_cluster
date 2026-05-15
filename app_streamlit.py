@@ -428,9 +428,16 @@ with tab_about:
             </div>
             <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
                 <h4 style="color:#CBD5E0; margin-bottom:15px; font-size:0.9rem;">Mari Terhubung:</h4>
-                <a href="https://instagram.com/USERNAME_IG_KAMU" target="_blank" style="text-decoration:none; display:inline-block; background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:white; padding:8px 16px; border-radius:8px; font-size:0.85rem; font-weight:bold; margin-right:10px; margin-bottom:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">📸 Instagram</a>
-                <a href="https://tiktok.com/@USERNAME_TIKTOK_KAMU" target="_blank" style="text-decoration:none; display:inline-block; background:#000000; color:white; padding:8px 16px; border-radius:8px; font-size:0.85rem; font-weight:bold; border: 1px solid #25F4EE; margin-right:10px; margin-bottom:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">🎵 TikTok</a>
-                <a href="mailto:EMAIL_KAMU@gmail.com" style="text-decoration:none; display:inline-block; background:#EA4335; color:white; padding:8px 16px; border-radius:8px; font-size:0.85rem; font-weight:bold; margin-bottom:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">📧 Email</a>
-            </div>
+                <a href="https://instagram.com/USERNAME_IG_KAMU" target="_blank" class="social-badge">
+                    📸 Instagram
+                </a>
+                
+                <a href="https://tiktok.com/@USERNAME_TIKTOK_KAMU" target="_blank" class="social-badge">
+                    🎵 TikTok
+                </a>
+                
+                <a href="mailto:EMAIL_KAMU@gmail.com" class="social-badge">
+                    📧 Email
+                </a></div>
         </div>
         """, unsafe_allow_html=True)
