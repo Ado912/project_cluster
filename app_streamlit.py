@@ -118,6 +118,7 @@ with st.sidebar:
     # Memanggil logo baru Anda
     if os.path.exists("logo.png"):
         st.image("logo.png", use_container_width=True)
+        st.markdown('<div class="logo-container"><span class="logo-text-groment" style="color:#F472B6; font-size:2rem; font-weight:bold;">GROMENT</span></div>', unsafe_allow_html=True)
     else:
         # Jika gambar gagal dimuat, tampilkan teks cadangan
         st.markdown('<div style="font-size:4rem; text-align:center; padding-top:20px;">🛍️</div>', unsafe_allow_html=True)
