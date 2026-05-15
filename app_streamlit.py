@@ -392,8 +392,6 @@ with tab_kode:
             st.markdown("<hr style='border:0.5px solid rgba(244, 114, 182, 0.2); margin:12px 0'>", unsafe_allow_html=True)
     except FileNotFoundError:
         st.error(f"File Notebook tidak ditemukan di: {nb_path}.")
-
-# ==========================================
 # TAB 4: ABOUT ME (PORTFOLIO STYLE)
 # ==========================================
 with tab_about:
@@ -429,10 +427,10 @@ with tab_about:
             <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
                 <h4 style="color:#CBD5E0; margin-bottom:15px; font-size:0.9rem;">Mari Terhubung:</h4>
                 <a href="https://instagram.com/USERNAME_IG_KAMU" target="_blank" class="social-badge">📸 Instagram</a>
-                
                 <a href="https://tiktok.com/@USERNAME_TIKTOK_KAMU" target="_blank" class="social-badge">🎵 Tiktok</a>
-                
                 <a href="mailto:EMAIL_KAMU@gmail.com" class="social-badge">📧 Email</a>
            </div>
         </div>
         """, unsafe_allow_html=True)
+# ==========================================
+
