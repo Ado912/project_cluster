@@ -127,9 +127,18 @@ st.markdown("""
         border-color: #38BDF8;
         color: #FFFFFF;
     }
-    /* Notebook Style Cells */
+   /* Notebook Style Cells */
     .notebook-cell { background-color: rgba(255, 255, 255, 0.02); border-left: 3px solid #F472B6; padding: 15px; border-radius: 4px; margin-bottom: 10px; }
-    .code-output { background-color: #050505; padding: 10px; border-radius: 6px; color: #93C5FD; font-size: 0.8rem !important; font-family: 'Courier New', monospace; }
+    .code-output { 
+        background-color: #050505; 
+        padding: 12px; 
+        border-radius: 6px; 
+        color: #93C5FD; 
+        font-size: 0.85rem !important; 
+        font-family: 'Courier New', Courier, monospace; 
+        white-space: pre-wrap; 
+        overflow-x: auto; 
+    }
 </style>
 """, unsafe_allow_html=True)
 
